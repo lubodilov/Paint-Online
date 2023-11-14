@@ -8,18 +8,23 @@ const io = new Server(server);
 const path = require('path');
 require('dotenv').config();
 
-app.use(express.static(path.join(__dirname, 'public')));
+app.use(express.static(path.join(__dirname, '../frontend')));
 
 app.get('/', (req, res) => {
-    res.sendFile(path.join(__dirname, 'views/home.html'));
+    res.sendFile(path.join(__dirname, '../frontend/views/home.html'));
 });
+
+
+// const matchService = require('./services/matchService.js');
 
 io.on('connection', (socket) => {
     console.log('A user connected');
 
-    // socket.on('disconnect', () => {
-    //     console.log('User disconnected');
-    // });
+    // matchService(socket , io);
+
+    socket.on('disconnect', () => {
+        console.log('User disconnected');
+    });
 });
 
 const PORT = process.env.PORT || 8000;
