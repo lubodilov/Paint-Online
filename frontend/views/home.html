@@ -10,6 +10,35 @@
 
     <body>
         <script src="/socket.io/socket.io.js"></script>
-        
+        <div id = "home">
+            <div id = "home-left">
+                <div id = "player-data">
+                    <img id = "player-img"></img>
+                    <label id = "player-name"></label>
+                </div>
+            </div>
+
+            <div id = "home-right">
+                <div id = "home-top">
+                    <div id = "game-title">
+                        <label>Paint Online</label>
+                    </div>
+                </div>
+
+                <div id = "home-middle">
+                    <canvas id = "home-canvas"></canvas>
+                </div>
+
+                <div id = "home-bottom">
+                    <button id = "solo"; class = "mode-button">Solo</button>
+                    <button id = "co-op"; class = "mode-button">Co Op</button>
+                    <button id = "versus"; class = "mode-button"; disabled>Versus</button>
+                </div>
+            </div>
+        </div>
+
+
+        <script src = "../js/commons/functions.js"></script>
+        <script src = "../js/objects/Player.js"></script>
     </body>
 </html>

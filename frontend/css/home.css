@@ -1,0 +1,74 @@
+body{
+    margin: 0;
+}
+
+#home{
+    display: flex;
+    height: 100vh;
+}
+
+#home-right{
+    display: flex;
+    justify-content: center;
+    align-content: space-evenly;
+    flex-wrap: wrap;
+    align-items: center;
+    width: 100%;
+}
+
+#home-top{
+    height: 76px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+#player-data{
+    width: max-content;
+    display: flex;
+    align-items: center;
+    padding: 8px;
+    border-bottom: 3px solid black;
+    border-right: 3px solid black;
+    border-bottom-right-radius: 20px;
+}
+
+#player-img{
+    height: 60px;
+}
+
+#player-name{
+    margin-left: 5px;
+}
+
+#game-title{
+    text-align: center;
+    font-size: 30px;
+    margin: auto;
+}
+
+
+#home-middle{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: inherit;
+}
+
+#home-canvas{
+    width: 90%;
+    height: 430px;
+    border: 1px solid black;
+}
+
+#home-bottom{
+    display: flex;
+    justify-content: space-around;
+    width: 100%;
+}
+
+.mode-button{
+    width: 12vw;
+    height: 6vw;
+    border-radius: 10px;
+}
