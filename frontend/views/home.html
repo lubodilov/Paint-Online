@@ -30,15 +30,48 @@
                 </div>
 
                 <div id = "home-bottom">
-                    <button id = "solo"; class = "mode-button">Solo</button>
-                    <button id = "co-op"; class = "mode-button">Co Op</button>
+                    <button id = "solo"; class = "mode-button"; disabled>Solo</button>
+                    <button id = "co-op"; class = "mode-button"; onclick = "openCoopPopup()">Co Op</button>
                     <button id = "versus"; class = "mode-button"; disabled>Versus</button>
                 </div>
+
+
+                <!-- COOP GAME POPUPS-->
+                <div id = "coop-popup"; class = "home-popup">
+                    <div id = "coop-popup-top">
+                        <button id  = "coop-popup-close"; onclick = "closeCoopPopup()">x</button>
+                    </div>
+
+                    <div id="coop-popup-bottom">
+                        <button onclick = "openJoinParty()">Join Match</button>
+                        <button onclick = "openCreateParty()">Create Match</button>
+                    </div>
+                </div>
+
+                <div id = "coop-join" class = "home-popup prejoin-popup">
+                    <div>
+                        <label>Enter Code:</label>
+                        <button onclick="closeJoinParty()">x</button>
+                    </div>
+                    <input id = "code-input" type = "number"></input>
+                    <button onclick = "joinMatch()">join</button>
+                </div>
+
+                <div id = "coop-create" class = "home-popup prejoin-popup">
+                    <div>
+                        <label>Players Number:</label>
+                        <button onclick="closeCreateParty()">x</button>
+                    </div>
+                    <input id = "players-number" type = "number"></input>
+                    <button onclick = "createMatch()">create</button>
+                </div>
+
             </div>
         </div>
 
 
         <script src = "../js/commons/functions.js"></script>
         <script src = "../js/objects/Player.js"></script>
+        <script src = "../js/menus/home.js"></script>
     </body>
 </html>

@@ -1,8 +1,11 @@
+let socket = io();
+
 class Player{
     constructor(id , name , image){
         this.id = id;
         this.name = name;
         this.image = image;
+        this.party = undefined;
     }
 
     setupPlayer(){
@@ -17,7 +20,7 @@ class Player{
 
     }
 
-    joinMatch(){
+    joinMatch(code){
 
     }
 
@@ -25,6 +28,3 @@ class Player{
 
     }
 }
-
-let player = new Player(generateRandomId(8) , generateRandomGuest(4) , './assets/guest.png');
-player.setupPlayer();

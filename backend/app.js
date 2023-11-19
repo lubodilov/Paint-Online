@@ -16,7 +16,7 @@ app.get('/', (req, res) => {
 
 
 // const matchService = require('./services/matchService.js');
-
+console.clear();
 io.on('connection', (socket) => {
     console.log('A user connected');
 
