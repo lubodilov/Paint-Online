@@ -21,7 +21,6 @@ function openCoopPopup(){
     cur_popup = "main";
     const popup_el = document.getElementById("coop-popup");
     showEl(popup_el);
-  
 }
 
 function closeCoopPopup(){
@@ -66,7 +65,20 @@ function closeCreateParty(){
 }
 
 function createMatch(){
+    closeCreateParty();
+
     cur_popup = "created";
-    player.createMatch();
+    const players_max_num = document.getElementById("players-number-input").value;    
     
+    player.createMatch(players_max_num);
+
+    const popup_el = document.getElementById("coop-party");
+    showEl(popup_el);
+}
+
+function leaveParty(){
+    const popup_el = document.getElementById("coop-party");
+    hideEl(popup_el);
+
+    player.leaveMatch()
 }

@@ -1,5 +1,3 @@
-let socket = io();
-
 class Player{
     constructor(id , name , image){
         this.id = id;
@@ -16,11 +14,12 @@ class Player{
         name_el.innerHTML = `${this.name}`;
     }
 
-    createMatch(){
-        if(party)return;
-        const party_id = generateCode(6);
-        this.party = new Party(party_id , this.id , [this.id]);
-        socket.emit("party-created" , (this.party_id , this.party));
+    createMatch(max_players){
+        if(this.party)return;
+
+        this.party = new Party(generateCode(6) , this.id , [this.id] , max_players , this);
+        this.party.createParty();
+        this.party.displayParty();
     }
 
     joinMatch(code){
@@ -28,6 +27,11 @@ class Player{
     }
 
     leaveMatch(){
+        if(this.party.creator_id === this.id)
+            this.party.deleteParty();
+        else
+            this.party.playerLeave(this.id);
 
+        this.party = undefined;
     }
 }

@@ -59,17 +59,39 @@
 
                 <div id = "coop-create" class = "home-popup prejoin-popup">
                     <div>
-                        <label>Players Number:</label>
+                        <label id = "players-number-label">Players Number:</label>
                         <button onclick="closeCreateParty()">x</button>
                     </div>
-                    <input id = "players-number" type = "number"></input>
+                    <input id = "players-number-input" type = "number"></input>
                     <button onclick = "createMatch()">create</button>
                 </div>
 
+
+
+
+                <div id = "coop-party" class = "home-popup">
+                    <div>
+                        <label id = "party-code">Code: #FG1DW2</label>
+                        <button id = "leave-party" onclick = "leaveParty()">x</button>
+                    </div>
+
+                    <div>
+                        <label id = "creator">Creator: Guest 5673</label>
+                    </div>
+
+                    <div>
+                        <label id = "players-num">Joined: 1 / 15</label>
+                    </div>
+
+                    <div id = "players-joined-ids">
+
+                    </div>
+                </div>
             </div>
         </div>
 
 
+        <script src = "../js/commons/constants.js"></script>
         <script src = "../js/commons/functions.js"></script>
         <script src = "../js/objects/Party.js"></script>
         <script src = "../js/objects/Player.js"></script>
