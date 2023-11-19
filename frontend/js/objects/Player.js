@@ -17,7 +17,10 @@ class Player{
     }
 
     createMatch(){
-
+        if(party)return;
+        const party_id = generateCode(6);
+        this.party = new Party(party_id , this.id , [this.id]);
+        socket.emit("party-created" , (this.party_id , this.party));
     }
 
     joinMatch(code){

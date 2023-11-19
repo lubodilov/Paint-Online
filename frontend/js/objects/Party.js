@@ -4,4 +4,6 @@ class Party{
         this.creator_id = creator_id;
         this.player_ids = player_ids;
     }
+
+    
 }

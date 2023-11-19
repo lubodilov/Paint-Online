@@ -6,34 +6,41 @@ let cur_popup;
     player.setupPlayer();
 // }
 
+function showEl(el){
+    el.style.opacity = "1";
+    el.style.visibility = "visible";
+}
+
+function hideEl(el){
+    el.style.opacity = "0";
+    el.style.visibility = "hidden";
+}
+
 function openCoopPopup(){
     if(cur_popup)return;
     cur_popup = "main";
     const popup_el = document.getElementById("coop-popup");
-    popup_el.style.opacity = "1";
-    popup_el.style.visibility = "visible";
+    showEl(popup_el);
+  
 }
 
 function closeCoopPopup(){
     cur_popup = undefined;
     const popup_el = document.getElementById("coop-popup");
-    popup_el.style.opacity = "0";
-    popup_el.style.visibility = "hidden";
+    hideEl(popup_el);
 }
 
 function openJoinParty(){
     closeCoopPopup();
     cur_popup = "join";
     const popup_el = document.getElementById("coop-join");
-    popup_el.style.opacity = 1;
-    popup_el.style.visibility = "visible";
+    showEl(popup_el);
 }
 
 function closeJoinParty(){
     cur_popup = undefined;
     const popup_el = document.getElementById("coop-join");
-    popup_el.style.opacity = 0;
-    popup_el.style.visibility = "hidden";
+    hideEl(popup_el);
 }
 
 function joinMatch(){
@@ -49,6 +56,17 @@ function openCreateParty(){
     closeCoopPopup();
     cur_popup = "create";
     const popup_el = document.getElementById("coop-create");
-    popup_el.style.opacity = 1;
-    popup_el.style.visibility = "visible";
+    showEl(popup_el);
+}
+
+function closeCreateParty(){
+    cur_popup = undefined;
+    const popup_el = document.getElementById("coop-create");
+    hideEl(popup_el);
+}
+
+function createMatch(){
+    cur_popup = "created";
+    player.createMatch();
+    
 }
