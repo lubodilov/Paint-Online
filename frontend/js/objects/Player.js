@@ -17,7 +17,7 @@ class Player{
     createMatch(max_players){
         if(this.party)return;
 
-        this.party = new Party(generateCode(6) , this.id , [this.id] , max_players , this);
+        this.party = new Party(generateCode(6) , this.id , this.name , [this.id] , max_players , this);
         this.party.createParty();
         this.party.displayParty();
     }

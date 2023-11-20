@@ -4,7 +4,20 @@ let cur_popup;
 // window.onload = () => {
     player = new Player(generateRandomId(8) , generateRandomGuest(4) , './assets/guest.png');
     player.setupPlayer();
+    createSelectPlayersNumber(MIN_PLAYER_NUMBER , MAX_PLAYER_NUMBER);
 // }
+
+function createSelectPlayersNumber(min_p , max_p){
+    const selectElement = document.getElementById("players-select");
+
+    for(let i = min_p; i <= max_p;i++){
+        const option = document.createElement("option");
+        option.innerHTML = i;
+        option.value = i;
+
+        selectElement.append(option);
+    }
+}
 
 function showEl(el){
     el.style.opacity = "1";
@@ -68,8 +81,11 @@ function createMatch(){
     closeCreateParty();
 
     cur_popup = "created";
-    const players_max_num = document.getElementById("players-number-input").value;    
-    
+    const selectElement = document.getElementById("players-select");
+    const selectedIndex = selectElement.selectedIndex;
+    const selectedOption = selectElement.options[selectedIndex];
+    const players_max_num = selectedOption.value;
+
     player.createMatch(players_max_num);
 
     const popup_el = document.getElementById("coop-party");

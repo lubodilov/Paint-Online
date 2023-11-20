@@ -1,9 +1,12 @@
 let parties = new Map();
 
 function partyControl(socket , io){
-    socket.on('create-party' , (party_id , party) => {
-        console.log("wtfff")
-        parties.set(`${party_id}` , party);
+    socket.on("hi" , (obj) => {
+        console.log(obj)
+    })
+
+    socket.on('create-party' , (party) => {
+        parties.set(`${party.code}` , party);
         console.log("party created");
     });
 

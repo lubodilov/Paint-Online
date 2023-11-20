@@ -51,9 +51,9 @@
                 <div id = "coop-join" class = "home-popup prejoin-popup">
                     <div>
                         <label>Enter Code:</label>
-                        <button onclick="closeJoinParty()">x</button>
+                        <button onclick = "closeJoinParty()">x</button>
                     </div>
-                    <input id = "code-input" type = "number"></input>
+                    <input id = "code-input"></input>
                     <button onclick = "joinMatch()">join</button>
                 </div>
 
@@ -62,7 +62,11 @@
                         <label id = "players-number-label">Players Number:</label>
                         <button onclick="closeCreateParty()">x</button>
                     </div>
-                    <input id = "players-number-input" type = "number"></input>
+
+                    <select id = "players-select">
+
+                    </select>
+
                     <button onclick = "createMatch()">create</button>
                 </div>
 
@@ -76,11 +80,11 @@
                     </div>
 
                     <div>
-                        <label id = "creator">Creator: Guest 5673</label>
+                        <label id = "creator"></label>
                     </div>
 
                     <div>
-                        <label id = "players-num">Joined: 1 / 15</label>
+                        <label id = "players-joined"></label>
                     </div>
 
                     <div id = "players-joined-ids">

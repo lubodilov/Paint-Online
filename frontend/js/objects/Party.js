@@ -1,14 +1,14 @@
 class Party{
-    constructor(code , creator_id , player_ids , max_players , player){
+    constructor(code , creator_id , creator_name , player_ids , max_players){
         this.code = code;
         this.creator_id = creator_id;
+        this.creator_name = creator_name;
         this.player_ids = player_ids;
         this.max_players = max_players;
-        this.player = player;
     }
 
     createParty(){
-        socket.emit('create-party' , this.code , this);
+        socket.emit('create-party' , this);
     }
 
     deleteParty(){
@@ -53,7 +53,9 @@ class Party{
     }
 
     displayParty(){
-        document.getElementById("players-number-label").innerHTML = `Players: ${this.player_ids.length } / ${this.max_players}`;
+        document.getElementById("party-code").innerHTML = `Code: ${this.code}`;
+        document.getElementById("players-joined").innerHTML = `Players: ${this.player_ids.length } / ${this.max_players}`;
+        document.getElementById("creator").innerHTML = `Creator: ${this.creator_name}`;
     }
 
     
