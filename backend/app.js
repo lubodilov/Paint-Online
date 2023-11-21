@@ -5,6 +5,8 @@ const server = http.createServer(app);
 const { Server } = require("socket.io");
 const io = new Server(server);
 
+const { partyControl } = require("./controls/partyControl.js");
+
 const path = require('path');
 require('dotenv').config();
 
@@ -15,12 +17,11 @@ app.get('/', (req, res) => {
 });
 
 
-// const matchService = require('./services/matchService.js');
-
+console.clear();
 io.on('connection', (socket) => {
     console.log('A user connected');
 
-    // matchService(socket , io);
+    partyControl(socket , io);
 
     socket.on('disconnect', () => {
         console.log('User disconnected');
