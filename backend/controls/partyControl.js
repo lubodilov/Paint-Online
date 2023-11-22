@@ -28,8 +28,8 @@ function partyControl(socket , io){
 
     socket.on("update-party" , (party_id , party) => {
         parties.set(`${party_id}` , party);
-
-        io.emit("party-updated" , party_id , party);
+        socket.to(`party ${party_id}`).emit("party-updated" , party);
+        socket.emit("party-updated" , party);
     });
 
     socket.on("start-game" , (code) => {

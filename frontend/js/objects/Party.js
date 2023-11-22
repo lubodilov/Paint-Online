@@ -23,9 +23,9 @@ class Party{
     }
 
     listenSockets(){
-        socket.on("party-updated" , (code , party) => {
+        socket.on("party-updated" , (party) => {
     
-            player.party?.partyUpdated(code , party);
+            player.party?.partyUpdated(party);
         });
 
         socket.on("game-started" , () => {
@@ -93,22 +93,20 @@ class Party{
         socket.emit("update-party" , this.code , this.getData());
     }
 
-    partyUpdated(code , party){
-        if(this.code === code){
-            this.creator_id = party.creator_id;
-            this.creator_name = party.creator_name;
-            this.player_ids = party.player_ids;
-            this.player_names = party.player_names;
-            this.max_players = party.max_players;
-            
-            this.displayParty();
-        }
+    partyUpdated(party){
+        this.creator_id = party.creator_id;
+        this.creator_name = party.creator_name;
+        this.player_ids = party.player_ids;
+        this.player_names = party.player_names;
+        this.max_players = party.max_players;
+        
+        this.displayParty();
     }
 
     displayParty(){
         document.getElementById("party-code").innerHTML = `Code: ${this.code}`;
         document.getElementById("players-joined").innerHTML = `Players: ${this.player_ids.length } / ${this.max_players}`;
-        document.getElementById("creator").innerHTML = `Creator: ${this.creator_name}`;
+        document.getElementById("creator").innerHTML = `Creator: ${this.creator_name} ${(this.creator_id === this.local_player.id) ? "(You)" : ""}`;
 
         const party_players_el = document.getElementById("players-joined-ids");
         const player_els = document.getElementsByClassName("player-party-info");
@@ -121,7 +119,8 @@ class Party{
             div.classList = "player-party-info";
 
             const name_label = document.createElement("label");
-            name_label.innerHTML = this.player_names[i]
+
+            name_label.innerHTML = `${this.player_names[i]} ${(this.player_ids[i] === this.local_player.id) ? "(You)" : ""}`;
 
             party_players_el.append(div)
             div.append(name_label);

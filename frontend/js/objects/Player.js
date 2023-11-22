@@ -30,6 +30,7 @@ class Player{
         socket.on("party-searched" , (party) => {
                 if(!party){
                     //TODO Function that shows error party not found
+                    leaveFn();
                     console.log("Party not found!")
                     return;
                 }
@@ -49,6 +50,7 @@ class Player{
         }
 
     leaveMatch(){
+        if(!this.party)return;
         this.party.playerLeave(this.id);
         this.party = undefined;
     }
