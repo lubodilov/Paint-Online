@@ -16,6 +16,10 @@ app.get('/', (req, res) => {
     res.sendFile(path.join(__dirname, '../frontend/views/home.html'));
 });
 
+app.get('/:id', (req, res) => {
+    res.sendFile(path.join(__dirname, '../frontend/views/game.html'));
+});
+
 
 console.clear();
 io.on('connection', (socket) => {

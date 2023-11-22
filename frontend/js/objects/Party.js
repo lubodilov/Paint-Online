@@ -1,62 +1,140 @@
 class Party{
-    constructor(code , creator_id , creator_name , player_ids , max_players){
+    constructor(code , creator_id , creator_name , player_ids , player_names, max_players , local_player){
         this.code = code;
         this.creator_id = creator_id;
         this.creator_name = creator_name;
         this.player_ids = player_ids;
+        this.player_names = player_names;
         this.max_players = max_players;
+        this.local_player = local_player;
+    }
+
+    getData(){
+        const obj = {
+            code: this.code,
+            creator_id: this.creator_id,
+            creator_name: this.creator_name,
+            player_ids: this.player_ids,
+            player_names: this.player_names,
+            max_players: this.max_players
+        }
+
+        return obj;
+    }
+
+    listenSockets(){
+        socket.on("party-updated" , (code , party) => {
+    
+            player.party?.partyUpdated(code , party);
+        });
+
+        socket.on("game-started" , () => {
+            location.pathname = `/${player.party.code}`;
+        })
     }
 
     createParty(){
-        socket.emit('create-party' , this);
+        document.getElementById("start-game").removeAttribute("disabled");
+        socket.emit('create-party' , this.getData());
+        socket.emit("join-party" , this.code);
     }
 
     deleteParty(){
         socket.emit("delete-party" , this.code);
-
-        socket.on("party-deleted" , (code) => {
-            if(this.code === code)
-                this.playerDisconnect();
-        });
+        socket.emit("leave-party" , this.code);
     }
 
-    playerLeave(id){
+    changeCreator(){
+        if(this.player_ids.length === 0)return;
+
+        this.creator_id = this.player_ids[0];
+        this.creator_name = this.player_names[0];
+    }
+
+    playerLeave(){
         for(const player_id in this.player_ids)
-            if(id === this.player_ids[player_id])
-                this.player_ids = this.player_ids.slice(player_id , 1);
-        
-        socket.emit("update-party" , this.code , this);
+            if(this.local_player.id === this.player_ids[player_id]){
+                this.player_ids.splice(player_id , 1);
+                this.player_names.splice(player_id , 1);
+                break;
+            }
 
-        this.updateParty();
+        if(this.local_player.id === this.creator_id)
+            this.changeCreator();  
+        
+        if(this.player_ids.length === 0)
+            this.deleteParty();
+        else
+            this.updateParty();
     }
 
-    playerJoin(id){
-        if(this.player_ids.length >= this.max_players)return;
+    playerJoin(leaveFn){
+        if(this.player_ids.length == this.max_players){
+            leaveFn();
+            //TODO Function that display error popup for too many people
+            console.log("party full!");
+            return;
+        }
 
-        this.player_ids.push(id);
+        socket.emit("join-party" , this.code);
 
-        socket.emit("update-party" , this.code , this);
+        this.player_ids.push(this.local_player.id);
+        this.player_names.push(this.local_player.name);
+
         this.updateParty();
     }
 
     playerDisconnect(){
-        this.playerLeave(player.id);
 
-        //Message For Disconnection
+        //TODO Message For Disconnection
     }
 
     updateParty(){
-        socket.on("party-updated" , (code , party) => {
-            if(this.code === code)
-                this.player_ids = party.player_ids;
-        });
+        socket.emit("update-party" , this.code , this.getData());
+    }
+
+    partyUpdated(code , party){
+        if(this.code === code){
+            this.creator_id = party.creator_id;
+            this.creator_name = party.creator_name;
+            this.player_ids = party.player_ids;
+            this.player_names = party.player_names;
+            this.max_players = party.max_players;
+            
+            this.displayParty();
+        }
     }
 
     displayParty(){
         document.getElementById("party-code").innerHTML = `Code: ${this.code}`;
         document.getElementById("players-joined").innerHTML = `Players: ${this.player_ids.length } / ${this.max_players}`;
         document.getElementById("creator").innerHTML = `Creator: ${this.creator_name}`;
+
+        const party_players_el = document.getElementById("players-joined-ids");
+        const player_els = document.getElementsByClassName("player-party-info");
+
+        while(player_els.length > 0)
+            player_els[0].remove();
+
+        for(let i = 0; i < this.player_names.length;i++){
+            const div = document.createElement("div");
+            div.classList = "player-party-info";
+
+            const name_label = document.createElement("label");
+            name_label.innerHTML = this.player_names[i]
+
+            party_players_el.append(div)
+            div.append(name_label);
+
+            if(this.local_player.id === this.creator_id && this.player_ids.length == this.max_players)
+                document.getElementById("start-game").removeAttribute("disabled");
+            else
+                document.getElementById("start-game").setAttribute("disabled" , "");
+
+        }
     }
 
-    
+    startGame(){
+        socket.emit("start-game" , this.code);
+    }
 }

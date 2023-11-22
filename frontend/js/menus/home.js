@@ -56,11 +56,16 @@ function closeJoinParty(){
 }
 
 function joinMatch(){
+    closeJoinParty();
+
     cur_popup = "joined";
     const code = document.getElementById("code-input").value;
     
     // openJoinedPopup();
-    // player.joinMatch(code);
+    const popup_el = document.getElementById("coop-party");
+    showEl(popup_el);
+
+    player.joinMatch(code , leaveParty);
 }
 
 
@@ -93,8 +98,13 @@ function createMatch(){
 }
 
 function leaveParty(){
+    cur_popup = undefined;
     const popup_el = document.getElementById("coop-party");
     hideEl(popup_el);
 
     player.leaveMatch()
+}
+
+function startGame(){
+    player.party.startGame();
 }
