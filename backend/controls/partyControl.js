@@ -1,27 +1,41 @@
 let parties = new Map();
 
 function partyControl(socket , io){
-    socket.on("hi" , (obj) => {
-        console.log(obj)
+
+    socket.on("join-party" , (code) => {
+        console.log("player joined room!");
+        socket.join(`party ${code}`);
+    })
+
+    socket.on("leave-party" , (code) => {
+        console.log("player left room!");
+        socket.leave(`party ${code}`);
     })
 
     socket.on('create-party' , (party) => {
         parties.set(`${party.code}` , party);
-        console.log("party created");
     });
+
+    socket.on('search-party' , (code) => {
+        const party = parties.get(`${code}`);
+        socket.emit("party-searched" , party);
+    })
+
 
     socket.on("delete-party" , (party_id) => {
         parties.delete(`${party_id}`);
-        console.log("party deleted")
-        io.emit("party-deleted" , party_id);
     });
 
     socket.on("update-party" , (party_id , party) => {
         parties.set(`${party_id}` , party);
-        console.log("party updated")
 
         io.emit("party-updated" , party_id , party);
     });
+
+    socket.on("start-game" , (code) => {
+        socket.to(`party ${code}`).emit("game-started");
+        socket.emit("game-started");
+    })
 }
 
 module.exports = {partyControl};
