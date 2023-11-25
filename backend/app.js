@@ -5,7 +5,7 @@ const server = http.createServer(app);
 const { Server } = require("socket.io");
 const io = new Server(server);
 
-const { partyControl } = require("./controls/partyControl.js");
+const { partyControl } = require("./controllers/partyControlller.js");
 
 const path = require('path');
 require('dotenv').config();
@@ -19,7 +19,6 @@ app.get('/', (req, res) => {
 app.get('/:id', (req, res) => {
     res.sendFile(path.join(__dirname, '../frontend/views/game.html'));
 });
-
 
 console.clear();
 io.on('connection', (socket) => {

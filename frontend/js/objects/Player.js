@@ -4,6 +4,7 @@ class Player{
         this.name = name;
         this.image = image;
         this.party = undefined;
+        this.game = undefined;
     }
 
     setupPlayer(){
