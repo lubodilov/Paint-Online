@@ -1,3 +1,4 @@
+//HOME MENU FUNCTIONS
 function generateRandomId(length) {
     const charset = 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789';
     let result = '';
