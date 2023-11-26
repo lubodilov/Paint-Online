@@ -1,15 +1,21 @@
 const express = require('express');
 const app = express();
+
+const cors = require('cors')
+
 const http = require('http');
 const server = http.createServer(app);
+
 const { Server } = require("socket.io");
 const io = new Server(server);
 
-const { partyControl } = require("./controllers/partyControlller.js");
+console.clear();
 
 const path = require('path');
 require('dotenv').config();
 
+app.use(express.json());
+app.use(cors())
 app.use(express.static(path.join(__dirname, '../frontend')));
 
 app.get('/', (req, res) => {
@@ -20,7 +26,12 @@ app.get('/:id', (req, res) => {
     res.sendFile(path.join(__dirname, '../frontend/views/game.html'));
 });
 
-console.clear();
+// const guestDataRouter = require('./routes/GuestData.js');
+// app.use('/api/data', guestDataRouter);
+
+
+
+const partyControl = require("./controllers/partyControlller.js");
 io.on('connection', (socket) => {
     console.log('A user connected');
 

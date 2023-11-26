@@ -38,4 +38,4 @@ function partyControl(socket , io){
     })
 }
 
-module.exports = {partyControl};
+module.exports = partyControl;
