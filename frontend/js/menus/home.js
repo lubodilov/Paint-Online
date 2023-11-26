@@ -1,11 +1,16 @@
-let player;
 let cur_popup;
 
-// window.onload = () => {
+storage.setupStorage();
+if(storage.player_conf)
+    player = new Player(storage.player_conf.id , storage.player_conf.name , storage.player_conf.image);
+else
     player = new Player(generateRandomId(8) , generateRandomGuest(4) , './assets/guest.png');
-    player.setupPlayer();
-    createSelectPlayersNumber(MIN_PLAYER_NUMBER , MAX_PLAYER_NUMBER);
-// }
+
+player.setupPlayer();
+storage.savePlayerData(player);
+storage.listenForChange();
+
+createSelectPlayersNumber(MIN_PLAYER_NUMBER , MAX_PLAYER_NUMBER);
 
 function createSelectPlayersNumber(min_p , max_p){
     const selectElement = document.getElementById("players-select");

@@ -24,7 +24,7 @@ class Party{
 
     listenSockets(){
         socket.on("party-updated" , (party) => {
-    
+            storage.savePartyData(party);
             player.party?.partyUpdated(party);
         });
 
@@ -35,11 +35,13 @@ class Party{
 
     createParty(){
         document.getElementById("start-game").removeAttribute("disabled");
+        storage.savePartyData(this.getData());
         socket.emit('create-party' , this.getData());
         socket.emit("join-party" , this.code);
     }
 
     deleteParty(){
+        storage.removePartyData();
         socket.emit("delete-party" , this.code);
         socket.emit("leave-party" , this.code);
     }
@@ -85,7 +87,6 @@ class Party{
     }
 
     playerDisconnect(){
-
         //TODO Message For Disconnection
     }
 
@@ -134,6 +135,7 @@ class Party{
     }
 
     startGame(){
+        storage.changePlayerData();
         socket.emit("start-game" , this.code);
     }
 }
