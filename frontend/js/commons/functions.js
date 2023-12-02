@@ -35,3 +35,16 @@ function generateCode(length) {
 
   return "#" + result;
 }
+
+
+
+//DRAW MENU FUNCTIONS
+function createColors(){
+  const grid = document.getElementById("colors");
+  for(let i = 0;i < 15;i++){
+    const el = document.createElement("div");
+    el.classList = "color";
+    el.style.backgroundColor = `${colors[i]}`;
+    grid.append(el); 
+  }
+}

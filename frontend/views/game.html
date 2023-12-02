@@ -4,10 +4,144 @@
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title>Paint Online</title>
+        <link rel="stylesheet" href="../css/game.css">
     </head>
     <body>
         <script src = "/socket.io/socket.io.js"></script>
 
+        <div id = "game">
+            <div id = "top">
+                <div id = "actions">
+                    <div id = "upload">Upload</div>
+                    <div id = "download">Download</div>
+                    <div id = "view">View</div>
+                </div>
+
+                <div id = "leave">
+                    <img src = "../assets/leave.png">
+                </div>
+            </div>
+
+
+
+            <div id = "middle">
+                <div id = "trimmer-tools">
+                    <div id = "paste">
+                        <img src = "../assets/paste.png">
+                    </div>
+
+                    <div id = "removing-tools">
+                        <div id = "copy">
+                            <img src = "../assets/copy.png">
+                        </div>
+
+                        <div id = "cut">
+                            <img src = "../assets/cut.png">
+                        </div>
+
+                        <div id = "delete">
+                            <img src = "../assets/delete.png">
+                        </div>
+                    </div>
+                </div>
+
+                <div id = "basic-tools">
+                    <div id = "pen">
+                        <img src = "../assets/pen.png">
+                    </div>
+
+                    <div id = "color-picker">
+                        <img src = "../assets/color-picker.png">
+                    </div>
+
+                    <div id = "rubber">
+                        <img src = "../assets/rubber.png">
+                    </div>
+
+                    <div id = "text">
+                        <img src = "../assets/text.png">
+                    </div>
+
+                    <div id = "paint-bucket">
+                        <img src = "../assets/bucket.png">
+                    </div>
+
+                    <div id = "select">
+                        <img src = "../assets/select.png">
+                    </div>
+                </div>
+
+                <div class = "dropdown-box">
+                    <div class = "dropdown">
+                        <img src = "../assets/line-size.png">
+                    </div>
+
+                    <div class = "arrow">
+                        <img src = "../assets/arrow-down.png">
+                    </div>
+                </div>
+
+                <div class = "dropdown-box">
+                    <div class = "dropdown">
+                        <img src = "../assets/line-size.png">
+                    </div>
+
+                    <div class = "arrow">
+                        <img src = "../assets/arrow-down.png">
+                    </div>
+                </div>
+
+                <div id = "shapes">
+                    <div id = "line">
+                        <img src = "../assets/line.png">
+                    </div>
+
+                    <div id = "circle">
+                        <img src = "../assets/circle.png">
+                    </div>
+
+                    <div id = "triangle">
+                        <img src = "../assets/triangle.png">
+                    </div>
+
+                    <div id = "rectangle">
+                        <img src = "../assets/rectangle.png">
+                    </div>
+
+                    <div id = "curved-line">
+                        <img src = "../assets/curved-line.png">
+                    </div>
+
+                    <div id = "polygon">
+                        <img src = "../assets/polygon.png">
+                    </div>
+                </div>
+
+                <div id = "colors-wrapper">
+                    <div id = "color1">
+                        <div></div>
+                        <label>Color 1</label>
+                    </div>
+
+                    <div id = "color2">
+                        <div></div>
+                        <label>Color 2</label>
+                    </div>
+
+                    <div id = "colors"></div>
+
+                    <div id = "palette">
+                        <img src = "../assets/palette.png">
+                    </div>
+                </div>
+            </div>
+
+
+
+            <div id = "bottom">
+                
+            </div>
+        </div>
 
 
 
@@ -18,6 +152,6 @@
         <script src = "../js/objects/Party.js"></script>
         <script src = "../js/objects/Player.js"></script>
         <script src = "../js/objects/Game.js"></script>
-        <script src = "../js/menus/game.js"  type = "module"></script>
+        <script src = "../js/menus/game.js" type = "module"></script>
     </body>
 </html>
