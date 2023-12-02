@@ -1,13 +1,13 @@
 //Commections
 let socket = io();
-const url = 'http://localhost:3000';
+const URL = 'http://localhost:3000';
 
 //Party Configuration
 const MIN_PLAYER_NUMBER = 2;
 const MAX_PLAYER_NUMBER = 10;
 
 //Colors Configuration
-const colors = [
+const STARTING_COLORS = [
     "#800080",
     "#0000FF",
     "#FFC0CB",
@@ -25,3 +25,11 @@ const colors = [
     "transparent",
   ];
   
+// //
+// const NONE = 0;
+// const LINE = 1;
+// const CIRCLE = 2;
+// const TRIANGLE = 3;
+// const RECTANGLE = 4;
+// const CURVED_LINE = 5;
+// const CUSTOM_SHAPE = 6;
