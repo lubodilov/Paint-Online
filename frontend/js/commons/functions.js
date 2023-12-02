@@ -44,7 +44,7 @@ function createColors(){
   for(let i = 0;i < 15;i++){
     const el = document.createElement("div");
     el.classList = "color";
-    el.style.backgroundColor = `${colors[i]}`;
+    el.style.backgroundColor = `${STARTING_COLORS[i]}`;
     grid.append(el); 
   }
 }
