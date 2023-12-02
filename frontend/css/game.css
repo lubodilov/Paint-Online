@@ -220,7 +220,7 @@ body{
     cursor: pointer;
 }
 
-/* Canvas */
+/* Canvas , Resizing dots*/
 
 #bottom{
     position: relative;
@@ -258,4 +258,20 @@ body{
     left: 400px;
     top: 150px;
     cursor: e-resize;
+}
+
+/* Zoom */
+#zoom-wrapper{
+    position: fixed;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+    bottom: 30px;
+    right: 30px;
+}
+
+#zoom-wrapper >img{
+    width: 30px;
+    height: 30px;
 }
