@@ -1,5 +1,6 @@
 body{
     margin: 0;
+    background-color: gray;
 }
 
 #top{
@@ -48,12 +49,15 @@ body{
 
 
 #middle{
+    position: sticky;
     display: grid;
     background-color: antiquewhite;
     grid-template-columns: 1.75fr 2.25fr 1fr 1fr 2.25fr 5.5fr;
     grid-column-gap: 20px;
     padding: 5px;
     background: linear-gradient(to right, #808080, #606060, #808080);
+    border-bottom: 2px solid black;
+    border-top: 1.5px solid black;
 }
 
 
@@ -214,4 +218,9 @@ body{
 #palette >img{
     width: 80%;
     cursor: pointer;
+}
+
+/* Canvas */
+#gameCanvas{
+    background-color: white;
 }
