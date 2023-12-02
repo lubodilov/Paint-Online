@@ -221,6 +221,41 @@ body{
 }
 
 /* Canvas */
+
+#bottom{
+    position: relative;
+}
+
 #gameCanvas{
     background-color: white;
+}
+
+.resize{
+    position: absolute;
+    transform: translate(-50% , -50%);
+    width: 7px;
+    height: 7px;
+    border-radius: 50%;
+    border: 1px solid black;
+    background-color: skyblue;
+}
+
+#resize_s{
+    left: 200px;
+    top: 300px;
+    cursor: s-resize;
+}
+
+
+#resize_se{
+    left: 400px;
+    top: 300px;
+    cursor: se-resize;
+}
+
+
+#resize_e{
+    left: 400px;
+    top: 150px;
+    cursor: e-resize;
 }
