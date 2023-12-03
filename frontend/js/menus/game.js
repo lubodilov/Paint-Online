@@ -1,7 +1,4 @@
 //TODO Validation if a person is joining the route by typing it and the route not containing a real party
-
-createColors();
-
 // const player_data = storage.getPlayerData();
 // const party_data = storage.getPartyData();
 const player_data = {
@@ -33,9 +30,32 @@ game = new Game(player , canvas);
 
 // game.listenForSockets();
 game.listenForEvents();
+createColors();
 
 
 
+function createColors(){
+    const grid = document.getElementById("colors");
+    for(let i = 0;i < 15;i++){
+      const el = document.createElement("div");
+      el.classList = "color";
+      el.style.backgroundColor = `${game.colors[i]}`;
+      el.onclick = () => { updateColor(i) }
+      grid.append(el); 
+    }
+}
+
+function updateColor(index){
+    if(game.color1.selected){
+        game.color1.color = game.colors[index];
+        game.color1.html_el.style.backgroundColor = game.colors[index];
+    }
+
+    if(game.color2.selected){
+        game.color2.color = game.colors[index];
+        game.color2.html_el.style.backgroundColor = game.colors[index];
+    }
+}
 
 
 function selectColor(num){
