@@ -25,11 +25,9 @@ const STARTING_COLORS = [
     "transparent",
   ];
   
-// //
-// const NONE = 0;
-// const LINE = 1;
-// const CIRCLE = 2;
-// const TRIANGLE = 3;
-// const RECTANGLE = 4;
-// const CURVED_LINE = 5;
-// const CUSTOM_SHAPE = 6;
+
+//Canvas Constants
+const C_WIDTH = 400;
+const C_HEIGHT = 300;
+
+const LINE_SIZE = [1 , 2 , 4 , 8];

@@ -2,8 +2,23 @@
 
 createColors();
 
-const player_data = storage.getPlayerData();
-const party_data = storage.getPartyData();
+// const player_data = storage.getPlayerData();
+// const party_data = storage.getPartyData();
+const player_data = {
+    id: "lkjhgfd" , 
+    name: "kjhgvfbn" ,
+    image: "jhgfhjkls"
+}
+
+const party_data = {
+    code: "hgfcdvb" ,
+    creator_id: "fnmgfrdd" ,
+    creator_name: "ajhgvfcv" ,
+    player_ids: ["123" , "234"] ,
+    player_names: ["123" , "234"] ,
+    max_players: 2
+}
+
 const canvas = document.getElementById("gameCanvas");
 
 player = new Player(player_data.id , player_data.name , player_data.image);
@@ -18,3 +33,30 @@ game = new Game(player , canvas);
 
 // game.listenForSockets();
 game.listenForEvents();
+
+
+
+
+
+function selectColor(num){
+    if(num === 1){
+        game.color1.selected = !game.color1.selected;
+        if(game.color1.selected){
+            game.color1.html_el.style.borderImage = "linear-gradient(to right, violet, indigo, blue, green, yellow, orange, red)";
+            game.color1.html_el.style.borderImageSlice = "1";
+            if(game.color2.selected)
+                selectColor(2);
+        }else
+            game.color1.html_el.style.borderImage = "none";
+    }else if(num === 2){
+        game.color2.selected = !game.color2.selected;
+        if(game.color2.selected){
+            game.color2.html_el.style.borderImage = "linear-gradient(to right, violet, indigo, blue, green, yellow, orange, red)";
+            game.color2.html_el.style.borderImageSlice = "1";
+            if(game.color1.selected)
+                selectColor(1);
+        }else
+            game.color2.html_el.style.borderImage = "none";
+    }else
+        console.error("Invalid Arguement");
+}
