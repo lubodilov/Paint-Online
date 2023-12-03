@@ -40,12 +40,14 @@ class Game{
 
         this.color1 = {
             color: "black" , 
-            selected: false
+            selected: false ,
+            html_el: document.getElementById("color1_color")
         }
 
         this.color2 = {
             color: "white" , 
-            selected: false
+            selected: false ,
+            html_el: document.getElementById("color2_color")
         }
 
         this.colors = STARTING_COLORS;
