@@ -17,23 +17,36 @@ class Canvas{
     }
 
     listenForEvents(){
+        this.canvas.addEventListener('contextmenu', function(e) {
+            e.preventDefault();
+        });
+
         this.canvas.addEventListener("mousedown" , (e) => {
-            if(this.local_game.tools.pen){
-                this.cur_figure = new CustomLine(this.canvas , this.ctx , game.line_conf.size);
-                this.cur_figure.startLine(e.offsetX , e.offsetY , "black");
+            if(this.local_game.tools.pen || this.local_game.tools.rubber){
+                let pen_color;
+                if(e.button === 0){
+                    pen_color = this.local_game.tools.pen ? game.color1.color : game.color2.color;
+                }else{
+                    pen_color = this.local_game.tools.pen ? game.color2.color : game.color1.color;
+                }
+
+                const default_width = this.local_game.tools.pen ? PEN_THICKNESS : RUBBER_THICKNESS;
+                this.cur_figure = new CustomLine(this.canvas , this.ctx , default_width , game.line_conf);
+                this.cur_figure.startLine(e.offsetX , e.offsetY , pen_color);
             }else
                 this.cur_figure = undefined;
+
         });
 
         this.canvas.addEventListener("mousemove" , (e) => {
             if(!this.cur_figure)return;
             
-            if(this.local_game.tools.pen)
+            if(this.local_game.tools.pen || this.local_game.tools.rubber)
                 this.cur_figure.updateLine(e.offsetX , e.offsetY);            
         })
 
         this.canvas.addEventListener("mouseup" , () => {
-            if(this.local_game.tools.pen){
+            if(this.local_game.tools.pen || this.local_game.tools.rubber){
                 this.figures.push(this.cur_figure);
                 this.cur_figure.finishLine();
                 this.cur_figure = undefined;

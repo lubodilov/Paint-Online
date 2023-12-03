@@ -31,3 +31,9 @@ const C_WIDTH = 400;
 const C_HEIGHT = 300;
 
 const LINE_SIZE = [1 , 2 , 4 , 8];
+
+const DASH_LENGTH = 5;
+const GAP_LENGTH = 5;
+
+const PEN_THICKNESS = 1;
+const RUBBER_THICKNESS = 5;
