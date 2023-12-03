@@ -82,3 +82,27 @@ function selectColor(num){
     }else
         console.error("Invalid Arguement");
 }
+
+
+function triggerTool(tool){
+    const buf = game.tools[tool];
+
+    for(const key in game.instruments)
+        game.instruments[key] = false;  
+
+    for(const key in game.shapes)
+        game.shapes[key] = false;
+
+    for(const key in game.tools)
+        game.tools[key] = false;
+
+    const tool_els = document.getElementsByClassName("tool");
+    for(const tool_el of tool_els)
+        tool_el.style.backgroundColor = "transparent";
+
+    game.tools[tool] = !buf;
+    if(game.tools[tool])
+        document.getElementById(tool).style.backgroundColor = "skyblue";
+
+    //TODO cursor to become pencil , bucket , color picker and etc...
+}

@@ -3,7 +3,7 @@ class Game{
         //Main
         this.local_player = local_player;
         this.party = local_player.party;
-        this.canvas = new Canvas(canvas);
+        this.canvas = new Canvas(this , canvas);
 
 
         //Copy , Cut , Paste , Delete
@@ -51,9 +51,11 @@ class Game{
         }
 
         this.colors = STARTING_COLORS;
+
+        this.figures = [];
     }
 
     listenForEvents(){
-
+        this.canvas.listenForEvents();
     }
 }
