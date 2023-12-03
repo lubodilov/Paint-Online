@@ -46,6 +46,8 @@ function createColors(){
 }
 
 function updateColor(index){
+    if(game.colors[index] == "transparent")return;
+    
     if(game.color1.selected){
         game.color1.color = game.colors[index];
         game.color1.html_el.style.backgroundColor = game.colors[index];
