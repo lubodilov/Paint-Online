@@ -5,24 +5,28 @@ class Canvas{
         this.canvas_width = C_WIDTH;
         this.canvas_height = C_HEIGHT;
         this.zoom = 100;
-        this.figures_data = [];
         
-        this.canvas_data = undefined;
-        this.cur_figure = undefined;
-        this.figure_type = undefined;
+        this.cur_canvas_data = undefined;
+        this.all_canvas_data = [this.ctx.getImageData(0 , 0 , this.canvas_width , this.canvas_height)];
+        this.cur_canvas_index = 0;
     }
 
     listenForSockets(){
-        socket.on("figure-created" , (main_data , creator_id , figure_type , image_data) => {
-            this.createFigure(main_data , creator_id , figure_type , image_data);
+        socket.on("figure-created" , (image_data) => {
+            this.updateCanvas(image_data);
         });
 
-        socket.on("figure-updated" , (custom_data , updater_id , image_data) => {
-            this.updateFigure(custom_data , updater_id , image_data);
+        socket.on("figure-updated" , (image_data) => {
+            this.updateCanvas(image_data);
         });
         
-        socket.on("figure-finished" , (finisher_id) => {
-            this.finishFigure(finisher_id);
+        socket.on("figure-finished" , (image_data) => {
+            this.finishFigure(image_data);
+        });
+
+        socket.on("history-updated" , (history_index) => {
+            this.cur_canvas_index = history_index;
+            this.changeCanvas(this.all_canvas_data[this.cur_canvas_index]);
         });
     }
 
@@ -41,11 +45,11 @@ class Canvas{
                     break;
             }
 
-            this.canvas_data = this.canvas.toDataURL('image/png');
+            this.cur_canvas_data = this.canvas.toDataURL('image/png');
 
             if(this.cur_figure){
-                this.createFigure(this.cur_figure.getMainData() , player.id , this.figure_type , this.canvas_data);
-                socket.emit("create-figure" , player.party.code , this.cur_figure.getMainData() ,  player.id , this.figure_type , this.canvas_data);
+                this.updateCanvas(this.cur_canvas_data);
+                socket.emit("create-figure" , player.party.code , this.cur_canvas_data);
             }
         });
 
@@ -59,21 +63,16 @@ class Canvas{
                     break;
             }
 
-            this.canvas_data = this.canvas.toDataURL('image/png');
+            this.cur_canvas_data = this.canvas.toDataURL('image/png');
             
             if(this.cur_figure){
-                this.updateFigure(this.cur_figure.getCustomData() , player.id , this.canvas_data);
-                socket.emit("update-figure" , player.party.code , this.cur_figure.getCustomData() ,  player.id , this.canvas_data);
+                this.updateCanvas(this.cur_canvas_data);
+                socket.emit("update-figure" , player.party.code , this.cur_canvas_data);
             }
 
         });
 
         this.canvas.addEventListener("mouseup" , (e) => {
-            if(this.cur_figure){
-                this.finishFigure(player.id);
-                socket.emit("finish-figure" , player.party.code ,  player.id);    
-            }
-
             switch(tool){
                 case PEN:
                 case RUBBER:
@@ -83,60 +82,53 @@ class Canvas{
                     break;
             }
 
+            if(tool != NONE){
+                this.finishFigure(this.cur_canvas_data);
+                socket.emit("finish-figure" , player.party.code , this.cur_canvas_data);
+            }
         });
+
+        document.addEventListener('keydown', (e) => {
+            if (e.ctrlKey && e.key === 'z')
+                if(this.cur_canvas_index > 0)
+                    this.cur_canvas_index--;
+
+            if (e.ctrlKey && e.key === 'y')
+                if(this.cur_canvas_index < this.all_canvas_data.length - 1)
+                    this.cur_canvas_index++;
+
+            
+            socket.emit("update-history" , player.party.code , this.cur_canvas_index);
+            this.changeCanvas(this.all_canvas_data[this.cur_canvas_index]);
+          });
     }
 
-    createFigure(main_data , creator_id , figure_type , image_data){
+    updateCanvas(image_data){
         const img = new Image();
         img.src = image_data;
         img.onload = () => {
             this.ctx.drawImage(img, 0, 0);
-
         };
+    }
 
-        const figure_data = {
-            figure: undefined , 
-            creator: creator_id ,
-            active: true ,
-            editing: true , 
+    finishFigure(image_data){
+        if(this.cur_canvas_index < this.all_canvas_data.length  - 1){
+            const buf = this.all_canvas_data[this.cur_canvas_index];
+
+            while(this.all_canvas_data.length > 0)
+                this.all_canvas_data.pop();
+
+            this.all_canvas_data.push(buf);
+            this.cur_canvas_index = 0;
         }
 
-        let constructor_data = Object.values(main_data);
-
-        switch(figure_type){
-            case RUBBER:
-            case PEN:
-                figure_data.figure = new CustomLine(...constructor_data);
-                break;
-        }
-
-        this.figures_data.push(figure_data);
+        this.updateCanvas(image_data);
+        this.all_canvas_data.push(this.ctx.getImageData(0 , 0 , this.canvas_width , this.canvas_height));
+        this.cur_canvas_index++;
     }
 
-    updateFigure(custom_data , updater_id , image_data){
-        const img = new Image();
-        img.src = image_data;
-        img.onload = () => {
-            this.ctx.drawImage(img, 0, 0);
-
-        };
-        
-        for(const figure_data of this.figures_data)
-            if(figure_data.creator == updater_id && figure_data.editing)
-                figure_data.figure.updateCustomData(custom_data);
-        
-        this.canvas_data = image_data;
+    changeCanvas(image_data){
+        this.ctx.putImageData(image_data , 0 , 0);
     }
-
-    finishFigure(finisher_id){
-        for(const figure_data of this.figures_data)
-            if(figure_data.creator == finisher_id && figure_data.editing)
-                figure_data.editing = false;        
-    }
-
-    redrawCanvas(){
-        this.ctx.clearRect(0 , 0 , this.canvas_width , this.canvas_height);
-        for(const figure_data of this.figures_data)
-            figure_data.figure.draw();
-    }
+    
 }
