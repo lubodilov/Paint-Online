@@ -97,27 +97,27 @@
                 </div>
 
                 <div id = "shapes">
-                    <div id = "line">
+                    <div class = "tool" id = "line">
                         <img src = "../assets/line.png">
                     </div>
 
-                    <div id = "circle">
+                    <div class = "tool" id = "circle">
                         <img src = "../assets/circle.png">
                     </div>
 
-                    <div id = "triangle">
+                    <div class = "tool" id = "triangle">
                         <img src = "../assets/triangle.png">
                     </div>
 
-                    <div id = "rectangle">
+                    <div class = "tool" id = "rectangle" onclick = "triggerTool('rectangle')">
                         <img src = "../assets/rectangle.png">
                     </div>
 
-                    <div id = "curved-line">
+                    <div class = "tool" id = "curved-line">
                         <img src = "../assets/curved-line.png">
                     </div>
 
-                    <div id = "polygon">
+                    <div class = "tool" id = "polygon">
                         <img src = "../assets/polygon.png">
                     </div>
                 </div>
@@ -165,9 +165,11 @@
         <script src = "../js/commons/storage.js"></script>
 
         <script src = "../js/managers/CustomLineManager.js"></script>
+        <script src = "../js/managers/rectangleManager.js"></script>
 
         <script src = "../js/objects/CustomLine.js"></script>
-        
+        <script src = "../js/objects/Rectangle.js"></script>
+
 
         <script src = "../js/objects/Party.js"></script>
         <script src = "../js/objects/Player.js"></script>

@@ -42,8 +42,11 @@ class Canvas{
                 case RUBBER:
                     startCustomLine(this , e);
                     break;
-                default:
+                case RECTANGLE:
+                    startRectangle(this , e);
                     break;
+                default:
+                    return;
             }
 
             this.cur_canvas_data = this.canvas.toDataURL('image/png');
@@ -55,21 +58,24 @@ class Canvas{
         });
 
         this.canvas.addEventListener("mousemove" , (e) => {
+            if(!this.cur_figure)return;
+
             switch(tool){
                 case PEN:
                 case RUBBER:
                     updateCustomLine(this , e);
                     break;
-                default:
+                case RECTANGLE:
+                    updateRectangle(this , e);
                     break;
+                default:
+                    return;
             }
-
-            this.cur_canvas_data = this.canvas.toDataURL('image/png');
             
-            if(this.cur_figure){
-                this.updateCanvas(this.cur_canvas_data);
-                socket.emit("update-figure" , player.party.code , this.cur_canvas_data);
-            }
+            this.cur_canvas_data = this.canvas.toDataURL('image/png');
+        
+            this.updateCanvas(this.cur_canvas_data);
+            socket.emit("update-figure" , player.party.code , this.cur_canvas_data);
 
         });
 
@@ -79,8 +85,11 @@ class Canvas{
                 case RUBBER:
                     finishCustomLine(this , e);
                     break;
-                default:
+                case RECTANGLE:
+                    finishRectangle(this , e);
                     break;
+                default:
+                    return;
             }
 
             if(tool != NONE){
