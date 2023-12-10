@@ -10,6 +10,10 @@ function gameControl(socket , io){
     socket.on("finish-figure" , (game_code , image_data) => {
         socket.to(`party ${game_code}`).emit("figure-finished" , image_data);
     })
+
+    socket.on("update-history" , (game_code , history_index) => {
+        socket.to(`party ${game_code}`).emit("history-updated" , history_index);
+    })
 }
 
 module.exports = gameControl;

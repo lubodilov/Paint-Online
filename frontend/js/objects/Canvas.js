@@ -6,8 +6,8 @@ class Canvas{
         this.canvas_height = C_HEIGHT;
         this.zoom = 100;
         
-        this.cur_canvas_data = this.canvas.toDataURL('image/png');
-        this.all_canvas_data = [this.cur_canvas_data];
+        this.cur_canvas_data = undefined;
+        this.all_canvas_data = [this.ctx.getImageData(0 , 0 , this.canvas_width , this.canvas_height)];
         this.cur_canvas_index = 0;
     }
 
@@ -22,6 +22,11 @@ class Canvas{
         
         socket.on("figure-finished" , (image_data) => {
             this.finishFigure(image_data);
+        });
+
+        socket.on("history-updated" , (history_index) => {
+            this.cur_canvas_index = history_index;
+            this.changeCanvas(this.all_canvas_data[this.cur_canvas_index]);
         });
     }
 
@@ -40,11 +45,11 @@ class Canvas{
                     break;
             }
 
-            this.canvas_data = this.canvas.toDataURL('image/png');
+            this.cur_canvas_data = this.canvas.toDataURL('image/png');
 
             if(this.cur_figure){
-                this.updateCanvas(this.canvas_data);
-                socket.emit("create-figure" , player.party.code , this.canvas_data);
+                this.updateCanvas(this.cur_canvas_data);
+                socket.emit("create-figure" , player.party.code , this.cur_canvas_data);
             }
         });
 
@@ -58,11 +63,11 @@ class Canvas{
                     break;
             }
 
-            this.canvas_data = this.canvas.toDataURL('image/png');
+            this.cur_canvas_data = this.canvas.toDataURL('image/png');
             
             if(this.cur_figure){
-                this.updateCanvas(this.canvas_data);
-                socket.emit("update-figure" , player.party.code , this.canvas_data);
+                this.updateCanvas(this.cur_canvas_data);
+                socket.emit("update-figure" , player.party.code , this.cur_canvas_data);
             }
 
         });
@@ -77,12 +82,25 @@ class Canvas{
                     break;
             }
 
-            if(this.cur_figure){
-                this.finishFigure(this.canvas_data);
-                socket.emit("update-figure" , player.party.code , this.canvas_data);
+            if(tool != NONE){
+                this.finishFigure(this.cur_canvas_data);
+                socket.emit("finish-figure" , player.party.code , this.cur_canvas_data);
             }
-
         });
+
+        document.addEventListener('keydown', (e) => {
+            if (e.ctrlKey && e.key === 'z')
+                if(this.cur_canvas_index > 0)
+                    this.cur_canvas_index--;
+
+            if (e.ctrlKey && e.key === 'y')
+                if(this.cur_canvas_index < this.all_canvas_data.length - 1)
+                    this.cur_canvas_index++;
+
+            
+            socket.emit("update-history" , player.party.code , this.cur_canvas_index);
+            this.changeCanvas(this.all_canvas_data[this.cur_canvas_index]);
+          });
     }
 
     updateCanvas(image_data){
@@ -90,13 +108,27 @@ class Canvas{
         img.src = image_data;
         img.onload = () => {
             this.ctx.drawImage(img, 0, 0);
-
         };
-
-        this.canvas_data = image_data;
     }
 
     finishFigure(image_data){
-        this.all_canvas_data.push(image_data);
+        if(this.cur_canvas_index < this.all_canvas_data.length  - 1){
+            const buf = this.all_canvas_data[this.cur_canvas_index];
+
+            while(this.all_canvas_data.length > 0)
+                this.all_canvas_data.pop();
+
+            this.all_canvas_data.push(buf);
+            this.cur_canvas_index = 0;
+        }
+
+        this.updateCanvas(image_data);
+        this.all_canvas_data.push(this.ctx.getImageData(0 , 0 , this.canvas_width , this.canvas_height));
+        this.cur_canvas_index++;
     }
+
+    changeCanvas(image_data){
+        this.ctx.putImageData(image_data , 0 , 0);
+    }
+    
 }
