@@ -171,6 +171,8 @@ body {
     width: 4vw;
     height: 4vw;
     cursor: pointer;
+    box-sizing: border-box;
+    border: 3px solid transparent;
 }
 
 #color1>div {

@@ -45,27 +45,27 @@
                     </div>
                 </div>
                 <div id = "basic-tools">
-                    <div id = "pen">
+                    <div class = "tool" id = "pen" onclick = "triggerTool('pen')">
                         <img src = "../assets/pen.png">
                     </div>
 
-                    <div id = "color-picker">
+                    <div class = "tool" id = "color-picker" onclick = "triggerTool('color-picker')">
                         <img src = "../assets/color-picker.png">
                     </div>
 
-                    <div id = "rubber">
+                    <div class = "tool" id = "rubber" onclick = "triggerTool('rubber')">
                         <img src = "../assets/rubber.png">
                     </div>
 
-                    <div id = "text">
+                    <div class = "tool" id = "text" onclick = "triggerTool('text')">
                         <img src = "../assets/text.png">
                     </div>
 
-                    <div id = "paint-bucket">
+                    <div class = "tool" id = "paint-bucket" onclick = "triggerTool('paint-bucket')">
                         <img src = "../assets/bucket.png">
                     </div>
 
-                    <div id = "select">
+                    <div class = "tool" id = "select" onclick = "triggerTool('select')">
                         <img src = "../assets/select.png">
                     </div>
                 </div>
@@ -118,12 +118,12 @@
 
                 <div id = "colors-wrapper">
                     <div id = "color1">
-                        <div></div>
+                        <div id = "color1_color"; onclick = "selectColor(1)"></div>
                         <label>Color 1</label>
                     </div>
 
                     <div id = "color2">
-                        <div></div>
+                        <div id = "color2_color"; onclick = "selectColor(2)"></div>
                         <label>Color 2</label>
                     </div>
 
@@ -157,10 +157,16 @@
         <script src = "../js/commons/variables.js"></script>
         <script src = "../js/commons/functions.js"></script>
         <script src = "../js/commons/storage.js"></script>
+
+        <script src = "../js/managers/CustomLineManager.js"></script>
+
+        <script src = "../js/objects/CustomLine.js"></script>
+        
+
         <script src = "../js/objects/Party.js"></script>
         <script src = "../js/objects/Player.js"></script>
         <script src = "../js/objects/Canvas.js"></script>
-        <script src = "../js/objects/Game.js"></script>
-        <script src = "../js/menus/game.js" type = "module"></script>
+
+        <script src = "../js/menus/game.js"></script>
     </body>
 </html>

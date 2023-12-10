@@ -31,11 +31,14 @@ app.get('/:id', (req, res) => {
 
 
 
-const partyControl = require("./controllers/partyControlller.js");
+const partyControl = require("./controllers/partyController.js");
+const gameControl = require("./controllers/gameController.js");
+
 io.on('connection', (socket) => {
     console.log('A user connected');
 
     partyControl(socket , io);
+    gameControl(socket , io);
 
     socket.on('disconnect', () => {
         console.log('User disconnected');

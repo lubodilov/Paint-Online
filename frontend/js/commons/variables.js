@@ -1,2 +1,28 @@
 let player;
-let game;
+let canvas;
+
+
+//Copy , Cut , Paste , Delete
+let selected_figure = undefined;
+let tool = NONE;
+
+let line_conf = {
+    dashed: true ,
+    size: LINE_SIZE[0]
+}
+
+let color1 = {
+    color: "black" , 
+    selected: false ,
+    html_el: document.getElementById("color1_color")
+}
+
+let color2 = {
+    color: "white" , 
+    selected: false ,
+    html_el: document.getElementById("color2_color")
+}
+
+let colors = STARTING_COLORS;
+
+let figures = [];
