@@ -53,6 +53,7 @@ body {
     background: linear-gradient(to right, #808080, #606060, #808080);
     border-bottom: 2px solid black;
     border-top: 1.5px solid black;
+    z-index: 999;
 }
 
 /* Trimmer Tools */
@@ -113,24 +114,53 @@ body {
 /* Line Size , Brushes */
 
 .dropdown-box {
+    position: relative;
     display: grid;
     grid-template-rows: 3fr 1fr;
     margin: 5px;
 }
 
-.dropdown-box>div {
+.dropdown-icon , .arrow {
     display: flex;
     justify-content: center;
     align-items: center;
 }
 
-.dropdown>img {
+.dropdown-icon >img {
     width: 70%;
 }
 
-.arrow>img {
+.dropdown{
+    display: flex;
+    opacity: 0;
+    visibility: hidden;
+    width: 150%;
+    position: absolute;
+    flex-direction: column;
+    top: calc(100% + 10px);
+    background-color: gray;
+    left: -25%;
+    transition: 0.25s ease-in-out;
+}
+
+.arrow >img {
     width: 30%;
     cursor: pointer;
+    transition: 0.25s ease-in-out;
+}
+
+#dashed{
+    border-bottom: 1px solid black;
+}
+
+.line-size{
+    width: 100%;
+    cursor: pointer;
+    text-align: center;
+}
+
+.first-size{
+    background-color: skyblue;
 }
 
 /* Shapes */

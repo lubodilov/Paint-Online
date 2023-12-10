@@ -71,18 +71,24 @@
                 </div>
 
                 <div class = "dropdown-box">
-                    <div class = "dropdown">
+                    <div class = "dropdown-icon">
                         <img src = "../assets/line-size.png">
                     </div>
 
-                    <div class = "arrow">
-                        <img src = "../assets/arrow-down.png">
+                    <div class = "arrow" onclick = "triggerSizeDropdown()">
+                        <img id = "size-arrow" src = "../assets/arrow-down.png">
+                    </div>
+
+                    <div class = "dropdown" id = "size-dropdown">
+                        <div id = "dashed">
+                            <input type = "checkbox" onclick = "triggerDashed()">Dashed</input>
+                        </div>
                     </div>
                 </div>
 
                 <div class = "dropdown-box">
-                    <div class = "dropdown">
-                        <img src = "../assets/line-size.png">
+                    <div class = "dropdown-icon">
+                        <img src = "../assets/drawing-tool.png">
                     </div>
 
                     <div class = "arrow">

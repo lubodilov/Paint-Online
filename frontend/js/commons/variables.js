@@ -7,7 +7,7 @@ let selected_figure = undefined;
 let tool = NONE;
 
 let line_conf = {
-    dashed: true ,
+    dashed: false ,
     size: LINE_SIZE[0]
 }
 
@@ -26,3 +26,7 @@ let color2 = {
 let colors = STARTING_COLORS;
 
 let figures = [];
+
+
+
+let line_size_popup = false;

@@ -6,6 +6,7 @@ class Canvas{
         this.canvas_height = C_HEIGHT;
         this.zoom = 100;
         
+        this.cur_figure = undefined;
         this.cur_canvas_data = undefined;
         this.all_canvas_data = [this.ctx.getImageData(0 , 0 , this.canvas_width , this.canvas_height)];
         this.cur_canvas_index = 0;
