@@ -1,22 +1,22 @@
-body{
+body {
     margin: 0;
     background-color: gray;
 }
 
-#top{
+#top {
     height: 30px;
     background-color: gray;
     display: flex;
     justify-content: space-between;
 }
 
-#actions{
+#actions {
     display: grid;
-    grid-template-columns: repeat(3 , 1fr);
+    grid-template-columns: repeat(3, 1fr);
     width: 60%;
 }
 
-#actions >div{
+#actions>div {
     display: flex;
     justify-content: center;
     align-items: center;
@@ -26,29 +26,24 @@ body{
     transition: opacity 0.1s ease-out;
 }
 
-#actions >div:hover{
-   opacity: 1;
-   text-decoration: underline;
+#actions>div:hover {
+    opacity: 1;
+    text-decoration: underline;
 }
 
-#leave{
+#leave {
     display: flex;
     justify-content: center;
     align-items: center;
     margin: 5px;
 }
 
-#leave >img{
+#leave>img {
     height: 100%;
     cursor: pointer;
 }
 
-
-
-
-
-
-#middle{
+#middle {
     position: sticky;
     display: grid;
     background-color: antiquewhite;
@@ -60,125 +55,119 @@ body{
     border-top: 1.5px solid black;
 }
 
-
-
-
-
 /* Trimmer Tools */
-#trimmer-tools{
+#trimmer-tools {
     display: grid;
     height: inherit;
     grid-template-columns: 3fr 1fr;
     grid-gap: 3px;
 }
 
-#paste{
+#paste {
     display: flex;
     justify-content: center;
     align-items: center;
     margin: 5px;
 }
 
-#paste >img{
+#paste>img {
     width: 100%;
     cursor: pointer;
 }
 
-#removing-tools{
+#removing-tools {
     display: grid;
-    grid-template-rows: repeat(3 , 1fr);
+    grid-template-rows: repeat(3, 1fr);
 }
 
-#removing-tools >div >img{
+#removing-tools>div>img {
     width: 100%;
     cursor: pointer;
 }
 
-#removing-tools >div{
+#removing-tools>div {
     display: flex;
     justify-content: center;
     align-items: center;
 }
-
-
 
 /* Basic Tools */
-#basic-tools{
+#basic-tools {
     display: grid;
-    grid-template-columns: repeat(3 , 1fr);
-    grid-template-rows: repeat(2 , 1fr);
+    background-image: none;
+    grid-template-columns: repeat(3, 1fr);
+    grid-template-rows: repeat(2, 1fr);
 }
 
-#basic-tools >div{
+#basic-tools>div {
     display: flex;
     justify-content: center;
     align-items: center;
 }
 
-#basic-tools >div >img{
+#basic-tools>div>img {
     width: 62.5%;
     cursor: pointer;
 }
 
-
-
 /* Line Size , Brushes */
 
-.dropdown-box{
+.dropdown-box {
     display: grid;
     grid-template-rows: 3fr 1fr;
     margin: 5px;
 }
 
-.dropdown-box >div{
+.dropdown-box>div {
     display: flex;
     justify-content: center;
     align-items: center;
 }
 
-.dropdown >img{
+.dropdown>img {
     width: 70%;
 }
 
-.arrow >img{
+.arrow>img {
     width: 30%;
     cursor: pointer;
 }
 
-
 /* Shapes */
-#shapes{
+#shapes {
     display: grid;
-    grid-template-columns: repeat(3 , 1fr);
-    grid-template-rows: repeat(2 , 1fr);
+    grid-template-columns: repeat(3, 1fr);
+    grid-template-rows: repeat(2, 1fr);
 }
 
-#shapes >div{
+#shapes>div {
     display: flex;
     justify-content: center;
     align-items: center;
 }
 
-#shapes >div >img{
+#shapes>div>img {
     width: 55%;
     cursor: pointer;
 }
 
 /* Colors */
-#colors-wrapper{
+#colors-wrapper {
     display: grid;
     grid-template-columns: 1fr 1fr 2.5fr 1fr;
     column-gap: 10px;
 }
 
-#color1 , #color2{
+#color1,
+#color2 {
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
 }
 
-#color1 >div , #color2 >div{
+#color1>div,
+#color2>div {
     width: 4vw;
     height: 4vw;
     cursor: pointer;
@@ -186,55 +175,56 @@ body{
     border: 3px solid transparent;
 }
 
-#color1 >div{
+#color1>div {
     background-color: black;
 }
 
-#color2 >div{
+#color2>div {
     background-color: white;
 }
 
-#color1 >label , #color2 >label{
+#color1>label,
+#color2>label {
     font-size: 1.5vw;
     margin-top: 0.5vh;
 }
 
-#colors{
+#colors {
     display: grid;
-    grid-template-columns: repeat(5 , 1fr);
-    grid-template-rows: repeat(3 , 1fr);
+    grid-template-columns: repeat(5, 1fr);
+    grid-template-rows: repeat(3, 1fr);
     grid-gap: 3px;
 }
 
-.color{
+.color {
     border: 2px solid black;
     cursor: pointer;
 }
 
-#palette{
+#palette {
     display: flex;
     justify-content: center;
     align-items: center;
 }
 
-#palette >img{
+#palette>img {
     width: 80%;
     cursor: pointer;
 }
 
 /* Canvas , Resizing dots*/
 
-#bottom{
+#bottom {
     position: relative;
 }
 
-#gameCanvas{
+#gameCanvas {
     background-color: white;
 }
 
-.resize{
+.resize {
     position: absolute;
-    transform: translate(-50% , -50%);
+    transform: translate(-50%, -50%);
     width: 7px;
     height: 7px;
     border-radius: 50%;
@@ -242,28 +232,26 @@ body{
     background-color: skyblue;
 }
 
-#resize_s{
+#resize_s {
     left: 200px;
     top: 300px;
     cursor: s-resize;
 }
 
-
-#resize_se{
+#resize_se {
     left: 400px;
     top: 300px;
     cursor: se-resize;
 }
 
-
-#resize_e{
+#resize_e {
     left: 400px;
     top: 150px;
     cursor: e-resize;
 }
 
 /* Zoom */
-#zoom-wrapper{
+#zoom-wrapper {
     position: fixed;
     display: flex;
     justify-content: center;
@@ -273,7 +261,102 @@ body{
     right: 30px;
 }
 
-#zoom-wrapper >img{
+#zoom-wrapper>img {
     width: 30px;
     height: 30px;
+}
+
+
+
+@media screen and (max-width: 790px) {
+
+    #game {
+        width: 100vw;
+    }
+
+    #actions {
+        width: 474px;
+    }
+
+    #middle {
+        height: 62.5px;
+        overflow: scroll;
+    }
+
+    #botom {
+        overflow: unset;
+    }
+
+    #paste {
+        width: 52px;
+        height: 52px;
+    }
+
+    #removing-tools {
+        width: 20.5px;
+        height: 62.5px;
+    }
+
+
+    #basic-tools {
+        width: 110px;
+        height: 62.5px;
+    }
+
+    .dropdown-box {
+        height: 52.5px;
+    }
+
+    .dropdown>img {
+        width: 27.5px;
+        height: 27.5px;
+    }
+
+    .arrow>img {
+        width: 11.5px;
+        height: 11.5px;
+    }
+
+    #shapes {
+        width: 111px;
+        height: 62.5px;
+    }
+
+    #color1,
+    #color2 {
+        width: 44px;
+        height: 62.5px;
+    }
+
+    #color1>div,
+    #color2>div {
+        width: 31.5px;
+        height: 31.5px;
+    }
+
+    #color1>label,
+    #color2>label {
+        font-size: 11.7px;
+        margin-top: 3.75px;
+    }
+
+    #colors {
+        width: 105px;
+        height: 62.5px;
+    }
+
+    #colors>div {
+        height: 15px;
+        width: 15px;
+    }
+
+    #palette {
+        width: 44px;
+        height: 62.5px;
+    }
+
+    #palette>img {
+        width: 35px;
+        height: 35px;
+    }
 }
