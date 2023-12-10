@@ -40,11 +40,6 @@ class Canvas{
                     break;
             }
             if(this.cur_figure){
-                const figure_data = {
-                    data: this.cur_figure.getMainData() , 
-                    creator: player.id ,
-                    type: this.figure_type
-                }
                 this.createFigure(this.cur_figure.getMainData() , player.id , this.figure_type);
                 socket.emit("create-figure" , player.party.code , this.cur_figure.getMainData() ,  player.id , this.figure_type);
             }
