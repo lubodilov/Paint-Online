@@ -22,7 +22,7 @@ class CustomLine{
         this.ctx.lineWidth = this.width;
 
         if(this.dashed)
-            this.ctx.setLineDash([DASH_LENGTH , GAP_LENGTH]);
+            this.ctx.setLineDash([DASH_LENGTH * this.line_conf.size , GAP_LENGTH * this.line_conf.size]);
         else
             this.ctx.setLineDash([]);
 

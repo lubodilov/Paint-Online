@@ -26,3 +26,7 @@ let color2 = {
 let colors = STARTING_COLORS;
 
 let figures = [];
+
+
+
+let line_size_popup = false;

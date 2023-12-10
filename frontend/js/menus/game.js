@@ -23,7 +23,7 @@ canvas.listenForSockets();
 canvas.listenForEvents();
 
 createColors();
-
+createSizes();
 
 
 function createColors(){
@@ -37,11 +37,42 @@ function createColors(){
     }
 }
 
-function triggerDashed(){
-    let checkbox = document.getElementById("dashed");
-    line_conf.dashed = !line_conf.dashed;
+function createSizes(){
+    const dropdown = document.getElementById("size-dropdown");
+    for(const index in LINE_SIZE){
+        const div = document.createElement("div");
+        div.onclick = () => { changeSize(index) };
 
-    console.log(line_conf.dashed)
+        if(index == 0)
+            div.classList = "line-size first-size";
+        else
+            div.classList = "line-size";
+
+        const label = document.createElement("label");
+        label.innerHTML = `${LINE_SIZE[index]}x`;
+
+        div.append(label);
+        dropdown.append(div);
+    }
+}
+
+function triggerDashed(){
+    line_conf.dashed = !line_conf.dashed;
+}
+
+function triggerSizeDropdown(){
+    const dropdown = document.getElementById("size-dropdown");
+    const arrow = document.getElementById("size-arrow");
+    line_size_popup = !line_size_popup;
+    if(line_size_popup){
+        dropdown.style.visibility = "visible";
+        dropdown.style.opacity = 1;
+        arrow.style.transform = "rotate(180deg)";
+    }else{
+        dropdown.style.visibility = "hidden";
+        dropdown.style.opacity = 0;
+        arrow.style.transform = "rotate(0deg)";
+    }
 }
 
 function changeSize(index){

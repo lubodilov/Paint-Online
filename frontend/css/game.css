@@ -120,7 +120,7 @@ body {
     margin: 5px;
 }
 
-.dropdown-box >div {
+.dropdown-icon , .arrow {
     display: flex;
     justify-content: center;
     align-items: center;
@@ -131,18 +131,22 @@ body {
 }
 
 .dropdown{
+    display: flex;
+    opacity: 0;
+    visibility: hidden;
     width: 150%;
     position: absolute;
-    display: flex;
     flex-direction: column;
     top: calc(100% + 10px);
     background-color: gray;
     left: -25%;
+    transition: 0.25s ease-in-out;
 }
 
 .arrow >img {
     width: 30%;
     cursor: pointer;
+    transition: 0.25s ease-in-out;
 }
 
 #dashed{
