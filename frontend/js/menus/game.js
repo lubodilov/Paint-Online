@@ -1,22 +1,12 @@
 //TODO Validation if a person is joining the route by typing it and the route not containing a real party
-// const player_data = storage.getPlayerData();
-// const party_data = storage.getPartyData();
-const player_data = {
-    id: "lkjhgfd" , 
-    name: "kjhgvfbn" ,
-    image: "jhgfhjkls"
-}
+const player_data = storage.getPlayerData();
+const party_data = storage.getPartyData();
 
-const party_data = {
-    code: "hgfcdvb" ,
-    creator_id: "fnmgfrdd" ,
-    creator_name: "ajhgvfcv" ,
-    player_ids: ["123" , "234"] ,
-    player_names: ["123" , "234"] ,
-    max_players: 2
-}
+storage.savePlayerData(player_data);
+storage.savePartyData(party_data);
+storage.listenForChange();
 
-const canvas = document.getElementById("gameCanvas");
+socket.emit("join-party" , party_data.code);
 
 player = new Player(player_data.id , player_data.name , player_data.image);
 player.party = new Party(party_data.code ,
@@ -26,10 +16,12 @@ player.party = new Party(party_data.code ,
                          party_data.player_names, 
                          party_data.max_players,
                          player);
-game = new Game(player , canvas);
+                         
+canvas = new Canvas();
 
-// game.listenForSockets();
-game.listenForEvents();
+canvas.listenForSockets();
+canvas.listenForEvents();
+
 createColors();
 
 
@@ -39,46 +31,61 @@ function createColors(){
     for(let i = 0;i < 15;i++){
       const el = document.createElement("div");
       el.classList = "color";
-      el.style.backgroundColor = `${game.colors[i]}`;
+      el.style.backgroundColor = `${colors[i]}`;
       el.onclick = () => { updateColor(i) }
       grid.append(el); 
     }
 }
 
 function updateColor(index){
-    if(game.colors[index] == "transparent")return;
+    if(colors[index] == "transparent")return;
     
-    if(game.color1.selected){
-        game.color1.color = game.colors[index];
-        game.color1.html_el.style.backgroundColor = game.colors[index];
+    if(color1.selected){
+        color1.color = colors[index];
+        color1.html_el.style.backgroundColor = colors[index];
     }
 
-    if(game.color2.selected){
-        game.color2.color = game.colors[index];
-        game.color2.html_el.style.backgroundColor = game.colors[index];
+    if(color2.selected){
+        color2.color = colors[index];
+        color2.html_el.style.backgroundColor = colors[index];
     }
 }
 
 
 function selectColor(num){
     if(num === 1){
-        game.color1.selected = !game.color1.selected;
-        if(game.color1.selected){
-            game.color1.html_el.style.borderImage = "linear-gradient(to right, violet, indigo, blue, green, yellow, orange, red)";
-            game.color1.html_el.style.borderImageSlice = "1";
-            if(game.color2.selected)
+        color1.selected = !color1.selected;
+        if(color1.selected){
+            color1.html_el.style.borderImage = "linear-gradient(to right, violet, indigo, blue, green, yellow, orange, red)";
+            color1.html_el.style.borderImageSlice = "1";
+            if(color2.selected)
                 selectColor(2);
         }else
-            game.color1.html_el.style.borderImage = "none";
+            color1.html_el.style.borderImage = "none";
     }else if(num === 2){
-        game.color2.selected = !game.color2.selected;
-        if(game.color2.selected){
-            game.color2.html_el.style.borderImage = "linear-gradient(to right, violet, indigo, blue, green, yellow, orange, red)";
-            game.color2.html_el.style.borderImageSlice = "1";
-            if(game.color1.selected)
+        color2.selected = !color2.selected;
+        if(color2.selected){
+            color2.html_el.style.borderImage = "linear-gradient(to right, violet, indigo, blue, green, yellow, orange, red)";
+            color2.html_el.style.borderImageSlice = "1";
+            if(color1.selected)
                 selectColor(1);
         }else
-            game.color2.html_el.style.borderImage = "none";
+            color2.html_el.style.borderImage = "none";
     }else
         console.error("Invalid Arguement");
+}
+
+
+function triggerTool(selected_tool){
+    const tool_els = document.getElementsByClassName("tool");
+    for(const tool_el of tool_els)
+        tool_el.style.backgroundColor = "transparent";
+
+    if(tool == selected_tool)tool = NONE;
+    else tool = selected_tool;
+    
+    if(tool != NONE)
+        document.getElementById(tool).style.backgroundColor = "skyblue";
+
+    //TODO cursor to become pencil , bucket , color picker and etc...
 }
