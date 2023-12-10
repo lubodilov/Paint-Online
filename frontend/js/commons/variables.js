@@ -7,7 +7,7 @@ let selected_figure = undefined;
 let tool = NONE;
 
 let line_conf = {
-    dashed: true ,
+    dashed: false ,
     size: LINE_SIZE[0]
 }
 

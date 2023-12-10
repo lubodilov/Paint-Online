@@ -37,6 +37,23 @@ function createColors(){
     }
 }
 
+function triggerDashed(){
+    let checkbox = document.getElementById("dashed");
+    line_conf.dashed = !line_conf.dashed;
+
+    console.log(line_conf.dashed)
+}
+
+function changeSize(index){
+    const line_sizes = document.getElementsByClassName("line-size");
+
+    for(const line_size of line_sizes)
+        line_size.style.backgroundColor = "transparent";
+
+    line_sizes[index].style.backgroundColor = "skyblue";
+    line_conf.size = LINE_SIZE[index];
+}
+
 function updateColor(index){
     if(colors[index] == "transparent")return;
     
