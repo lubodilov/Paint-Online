@@ -1,19 +1,28 @@
 class Canvas{
-    constructor(local_game , canvas){
-        this.local_game = local_game;
-        this.canvas = canvas;
-        this.ctx = canvas.getContext("2d")
+    constructor(){
+        this.canvas = game_canvas;
+        this.ctx = game_ctx;
         this.canvas_width = C_WIDTH;
         this.canvas_height = C_HEIGHT;
         this.zoom = 100;
-        this.figures = [];
-
+        this.figures_data = [];
 
         this.cur_figure = undefined;
+        this.figure_type = undefined;
     }
 
-    resetCanvas(){
-        this.ctx.clearRect(0 , 0 , this.canvas_width , this.canvas_height);
+    listenForSockets(){
+        socket.on("figure-created" , (main_data , creator_id , figure_type) => {
+            this.createFigure(main_data , creator_id , figure_type);
+        });
+
+        socket.on("figure-updated" , (custom_data , updater_id) => {
+            this.updateFigure(custom_data , updater_id);
+        });
+        
+        socket.on("figure-finished" , (finisher_id) => {
+            this.finishFigure(finisher_id);
+        });
     }
 
     listenForEvents(){
@@ -22,35 +31,103 @@ class Canvas{
         });
 
         this.canvas.addEventListener("mousedown" , (e) => {
-            if(this.local_game.tools.pen || this.local_game.tools.rubber){
-                let pen_color;
-                if(e.button === 0){
-                    pen_color = this.local_game.tools.pen ? game.color1.color : game.color2.color;
-                }else{
-                    pen_color = this.local_game.tools.pen ? game.color2.color : game.color1.color;
+            switch(tool){
+                case PEN:
+                case RUBBER:
+                    startCustomLine(this , e);
+                    break;
+                default:
+                    break;
+            }
+            if(this.cur_figure){
+                const figure_data = {
+                    data: this.cur_figure.getMainData() , 
+                    creator: player.id ,
+                    type: this.figure_type
                 }
-
-                const default_width = this.local_game.tools.pen ? PEN_THICKNESS : RUBBER_THICKNESS;
-                this.cur_figure = new CustomLine(this.canvas , this.ctx , default_width , game.line_conf);
-                this.cur_figure.startLine(e.offsetX , e.offsetY , pen_color);
-            }else
-                this.cur_figure = undefined;
-
+                this.createFigure(this.cur_figure.getMainData() , player.id , this.figure_type);
+                socket.emit("create-figure" , player.party.code , this.cur_figure.getMainData() ,  player.id , this.figure_type);
+            }
         });
 
         this.canvas.addEventListener("mousemove" , (e) => {
-            if(!this.cur_figure)return;
-            
-            if(this.local_game.tools.pen || this.local_game.tools.rubber)
-                this.cur_figure.updateLine(e.offsetX , e.offsetY);            
-        })
-
-        this.canvas.addEventListener("mouseup" , () => {
-            if(this.local_game.tools.pen || this.local_game.tools.rubber){
-                this.figures.push(this.cur_figure);
-                this.cur_figure.finishLine();
-                this.cur_figure = undefined;
+            switch(tool){
+                case PEN:
+                case RUBBER:
+                    updateCustomLine(this , e);
+                    break;
+                default:
+                    break;
             }
-        })
+            if(this.cur_figure){
+                this.updateFigure(this.cur_figure.getCustomData() , player.id);
+                socket.emit("update-figure" , player.party.code , this.cur_figure.getCustomData() ,  player.id);
+            }
+
+        });
+
+        this.canvas.addEventListener("mouseup" , (e) => {
+            if(this.cur_figure){
+                this.finishFigure(player.id);
+                socket.emit("finish-figure" , player.party.code ,  player.id);    
+            }
+
+            switch(tool){
+                case PEN:
+                case RUBBER:
+                    finishCustomLine(this , e);
+                    break;
+                default:
+                    break;
+            }
+
+        });
+    }
+
+    createFigure(main_data , creator_id , figure_type){
+        const figure_data = {
+            figure: undefined , 
+            creator: creator_id ,
+            active: true ,
+            editing: true , 
+        }
+
+        let constructor_data = Object.values(main_data);
+
+        switch(figure_type){
+            case RUBBER:
+            case PEN:
+                figure_data.figure = new CustomLine(...constructor_data);
+                break;
+        }
+
+        this.figures_data.push(figure_data);
+        console.log(this.figures_data)
+
+        this.redrawCanvas();
+    }
+
+    updateFigure(custom_data , updater_id){
+        for(const figure_data of this.figures_data)
+            if(figure_data.creator == updater_id && figure_data.editing)
+                figure_data.figure.updateCustomData(custom_data);
+        
+        this.redrawCanvas();
+    }
+
+    finishFigure(finisher_id){
+        console.log("finished")
+        for(const figure_data of this.figures_data)
+            if(figure_data.creator == finisher_id && figure_data.editing)
+                figure_data.editing = false;
+
+        console.log(this.figures_data)
+        
+    }
+
+    redrawCanvas(){
+        this.ctx.clearRect(0 , 0 , this.canvas_width , this.canvas_height);
+        for(const figure_data of this.figures_data)
+            figure_data.figure.draw();
     }
 }

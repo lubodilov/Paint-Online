@@ -1,7 +1,6 @@
 let parties = new Map();
 
 function partyControl(socket , io){
-
     socket.on("join-party" , (code) => {
         console.log("player joined room!");
         socket.join(`party ${code}`);
