@@ -8,22 +8,6 @@ storage.listenForChange();
 
 socket.emit("join-party" , party_data.code);
 
-document.addEventListener("DOMContentLoaded", function () {
-  // Get the dropdown button element
-  var dropdownBtn = document.querySelector("#basic-tools");
-
-  // Toggle the display of the dropdown content on click
-  dropdownBtn.addEventListener("click", function () {
-    this.classList.toggle("show");
-    var dropdownContent = this.querySelector("div");
-    if (dropdownContent.style.display === "block") {
-      dropdownContent.style.display = "none";
-    } else {
-      dropdownContent.style.display = "block";
-    }
-  });
-});
-
 player = new Player(player_data.id , player_data.name , player_data.image);
 player.party = new Party(party_data.code ,
                          party_data.creator_id, 

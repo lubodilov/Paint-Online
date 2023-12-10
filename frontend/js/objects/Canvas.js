@@ -102,8 +102,6 @@ class Canvas{
         }
 
         this.figures_data.push(figure_data);
-        console.log(this.figures_data)
-
         this.redrawCanvas();
     }
 
@@ -116,13 +114,9 @@ class Canvas{
     }
 
     finishFigure(finisher_id){
-        console.log("finished")
         for(const figure_data of this.figures_data)
             if(figure_data.creator == finisher_id && figure_data.editing)
-                figure_data.editing = false;
-
-        console.log(this.figures_data)
-        
+                figure_data.editing = false;        
     }
 
     redrawCanvas(){
