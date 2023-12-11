@@ -50,11 +50,6 @@ class Canvas{
             }
 
             this.cur_canvas_data = this.canvas.toDataURL('image/png');
-
-            if(this.cur_figure){
-                this.updateCanvas(this.cur_canvas_data);
-                socket.emit("create-figure" , player.party.code , this.cur_canvas_data);
-            }
         });
 
         this.canvas.addEventListener("mousemove" , (e) => {
@@ -73,10 +68,6 @@ class Canvas{
             }
             
             this.cur_canvas_data = this.canvas.toDataURL('image/png');
-        
-            this.updateCanvas(this.cur_canvas_data);
-            socket.emit("update-figure" , player.party.code , this.cur_canvas_data);
-
         });
 
         this.canvas.addEventListener("mouseup" , (e) => {
@@ -90,11 +81,6 @@ class Canvas{
                     break;
                 default:
                     return;
-            }
-
-            if(tool != NONE){
-                this.finishFigure(this.cur_canvas_data);
-                socket.emit("finish-figure" , player.party.code , this.cur_canvas_data);
             }
         });
 

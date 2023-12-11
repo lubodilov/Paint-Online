@@ -18,15 +18,28 @@ function startCustomLine(c , ev){
 
   
     c.cur_figure.startLine(ev.offsetX , ev.offsetY);
+
+    if(c.cur_figure){
+        c.updateCanvas(c.cur_canvas_data);
+        socket.emit("create-figure" , player.party.code , c.cur_canvas_data);
+    }
 }
 
 function updateCustomLine(c , ev){
     if(!c.cur_figure)return;
     c.cur_figure.updateLine(ev.offsetX , ev.offsetY);
+
+    c.updateCanvas(c.cur_canvas_data);
+    socket.emit("update-figure" , player.party.code , c.cur_canvas_data);
 }
 
 function finishCustomLine(c){
     if(!c.cur_figure)return;
+
+    if(c.cur_figure){
+        c.finishFigure(c.cur_canvas_data);
+        socket.emit("finish-figure" , player.party.code , c.cur_canvas_data);
+    }
+
     c.cur_figure = undefined;
-    // c.figures.push()
 }
