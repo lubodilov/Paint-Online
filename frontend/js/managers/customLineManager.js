@@ -1,6 +1,11 @@
 function startCustomLine(c , ev){
-    const default_width = (tool == PEN) ? PEN_THICKNESS : RUBBER_THICKNESS;
-    const type = (tool == PEN) ? PEN : RUBBER;
+    let default_width;
+    if(tool == PEN)default_width = PEN_THICKNESS;
+    if(tool == RUBBER)default_width = RUBBER_THICKNESS;
+    if(tool == BRUSH)default_width = BRUSH_THICKNESS;
+    
+    const type = tool;
+    
     let color;
     if(color1.selected)
         color = (ev.button == 0) ? color1.color : color2.color;
@@ -14,9 +19,6 @@ function startCustomLine(c , ev){
     }
 
     c.cur_figure = new CustomLine(default_width , line_conf , type , color);
-    c.figure_type = PEN;
-
-  
     c.cur_figure.startLine(ev.offsetX , ev.offsetY);
 
     if(c.cur_figure){

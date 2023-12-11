@@ -36,10 +36,8 @@ const DASH_LENGTH = 5;
 const GAP_LENGTH = 5;
 
 const PEN_THICKNESS = 1;
+const BRUSH_THICKNESS = 3;
 const RUBBER_THICKNESS = 5;
-
-
-
 
 
 const NONE = "none";
