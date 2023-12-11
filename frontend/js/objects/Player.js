@@ -17,7 +17,11 @@ class Player{
 
     createMatch(max_players){
         if(this.party)return;
-        this.party = new Party(generateCode(6) , this.id , this.name , [this.id] , [this.name] , max_players , this);
+        if(max_players == 1)
+            this.party = new Party(this.id , this.id , this.name , [this.id] , [this.name] , max_players , this);
+        else
+            this.party = new Party(generateCode(6), this.id , this.name , [this.id] , [this.name] , max_players , this);
+        
         this.party.listenSockets();
         this.party.createParty();
         this.party.displayParty();

@@ -34,10 +34,16 @@ function hideEl(el){
     el.style.visibility = "hidden";
 }
 
-function openCoopPopup(){
+function closeSoloPopup(){
+    cur_popup = undefined;
+    const popup_el = document.getElementById("solo-popup");
+    hideEl(popup_el);
+}
+
+function openSoloPopup(){
     if(cur_popup)return;
-    cur_popup = "main";
-    const popup_el = document.getElementById("coop-popup");
+    cur_popup = "solo";
+    const popup_el = document.getElementById("solo-popup");
     showEl(popup_el);
 }
 
@@ -45,6 +51,13 @@ function closeCoopPopup(){
     cur_popup = undefined;
     const popup_el = document.getElementById("coop-popup");
     hideEl(popup_el);
+}
+
+function openCoopPopup(){
+    if(cur_popup)return;
+    cur_popup = "main";
+    const popup_el = document.getElementById("coop-popup");
+    showEl(popup_el);
 }
 
 function openJoinParty(){
@@ -110,6 +123,12 @@ function leaveParty(){
     player.leaveMatch()
 }
 
-function startGame(){
+function startSoloGame(){
+    player.createMatch(1);
+    player.party.startGame();
+    
+}
+
+function startCoopGame(){
     player.party.startGame();
 }

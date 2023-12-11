@@ -16,7 +16,7 @@ player.party = new Party(party_data.code ,
                          party_data.player_names, 
                          party_data.max_players,
                          player);
-                         
+     
 canvas = new Canvas();
 
 canvas.listenForSockets();

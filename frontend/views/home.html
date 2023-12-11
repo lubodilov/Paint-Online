@@ -30,11 +30,18 @@
                 </div>
 
                 <div id = "home-bottom">
-                    <button id = "solo"; class = "mode-button"; disabled>Solo</button>
+                    <button id = "solo"; class = "mode-button"; onclick = "openSoloPopup()">Solo</button>
                     <button id = "co-op"; class = "mode-button"; onclick = "openCoopPopup()">Co Op</button>
                     <button id = "versus"; class = "mode-button"; disabled>Versus</button>
                 </div>
 
+                <div id = "solo-popup"; class = "home-popup">
+                    <div id = "solo-popup-top">Play solo?</div>
+                    <div id = "solo-popup-bottom">
+                        <button id = "play-solo" onclick = "startSoloGame()">Yes</button>
+                        <button id = "exit-solo" onclick = "closeSoloPopup()">No</button>
+                    </div>
+                </div>
 
                 <!-- COOP GAME POPUPS-->
                 <div id = "coop-popup"; class = "home-popup">
@@ -90,7 +97,7 @@
                     <div id = "players-joined-ids"></div>
 
                     <div id = "start-button-holder">
-                        <button id = "start-game" onclick = "startGame()">Start</button>
+                        <button id = "start-game" onclick = "startCoopGame()">Start</button>
                     </div>
                 </div>
             </div>
