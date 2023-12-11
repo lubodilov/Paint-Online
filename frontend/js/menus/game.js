@@ -152,3 +152,8 @@ function triggerTool(selected_tool){
 
     //TODO cursor to become pencil , bucket , color picker and etc...
 }
+
+function leaveGame(){
+    storage.changePlayerData();
+    location.pathname = `/`;
+}
