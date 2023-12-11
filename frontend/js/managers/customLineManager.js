@@ -12,19 +12,17 @@ function startCustomLine(c , ev){
     else if(color2.selected)
         color = (ev.button == 0) ? color2.color : color1.color;
     else{
-        if(tool == PEN)
-            color = (ev.button == 0) ? color1.color : color2.color;
-        else
+        if(tool == RUBBER)
             color = (ev.button == 0) ? color2.color : color1.color;
+        else
+            color = (ev.button == 0) ? color1.color : color2.color;
     }
 
     c.cur_figure = new CustomLine(default_width , line_conf , type , color);
     c.cur_figure.startLine(ev.offsetX , ev.offsetY);
 
-    if(c.cur_figure){
-        c.updateCanvas(c.cur_canvas_data);
-        socket.emit("create-figure" , player.party.code , c.cur_canvas_data);
-    }
+    c.updateCanvas(c.cur_canvas_data);
+    socket.emit("create-figure" , player.party.code , c.cur_canvas_data);
 }
 
 function updateCustomLine(c , ev){
