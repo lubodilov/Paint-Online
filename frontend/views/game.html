@@ -91,8 +91,18 @@
                         <img src = "../assets/drawing-tool.png">
                     </div>
 
-                    <div class = "arrow">
-                        <img src = "../assets/arrow-down.png">
+                    <div class = "arrow" onclick = "triggerInstrumentDropdown()">
+                        <img id = "instruments-arrow" src = "../assets/arrow-down.png">
+                    </div>
+
+                    <div class = "dropdown" id = "instruments-dropdown">
+                        <div class = "tool instrument" id = "brush">
+                            <label id = "brush-text" onclick = "triggerTool('brush')">Brush</label>
+                        </div>
+
+                        <div class = "tool instrument" id = "spray">
+                            <label id = "spray-text">Spray</label>
+                        </div>
                     </div>
                 </div>
 

@@ -153,7 +153,7 @@ body {
     border-bottom: 1px solid black;
 }
 
-.line-size{
+.line-size , .instrument{
     width: 100%;
     cursor: pointer;
     text-align: center;

@@ -63,6 +63,21 @@ function triggerDashed(){
 function triggerSizeDropdown(){
     const dropdown = document.getElementById("size-dropdown");
     const arrow = document.getElementById("size-arrow");
+    instruments_popup = !instruments_popup;
+    if(instruments_popup){
+        dropdown.style.visibility = "visible";
+        dropdown.style.opacity = 1;
+        arrow.style.transform = "rotate(180deg)";
+    }else{
+        dropdown.style.visibility = "hidden";
+        dropdown.style.opacity = 0;
+        arrow.style.transform = "rotate(0deg)";
+    }
+}
+
+function triggerInstrumentDropdown(){
+    const dropdown = document.getElementById("instruments-dropdown");
+    const arrow = document.getElementById("instruments-arrow");
     line_size_popup = !line_size_popup;
     if(line_size_popup){
         dropdown.style.visibility = "visible";

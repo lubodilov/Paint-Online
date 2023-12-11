@@ -40,6 +40,7 @@ class Canvas{
             switch(tool){
                 case PEN:
                 case RUBBER:
+                case BRUSH:
                     startCustomLine(this , e);
                     break;
                 case RECTANGLE:
@@ -58,6 +59,7 @@ class Canvas{
             switch(tool){
                 case PEN:
                 case RUBBER:
+                case BRUSH:
                     updateCustomLine(this , e);
                     break;
                 case RECTANGLE:
@@ -74,6 +76,7 @@ class Canvas{
             switch(tool){
                 case PEN:
                 case RUBBER:
+                case BRUSH:
                     finishCustomLine(this , e);
                     break;
                 case RECTANGLE:

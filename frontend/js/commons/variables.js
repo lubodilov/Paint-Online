@@ -30,3 +30,4 @@ let figures = [];
 
 
 let line_size_popup = false;
+let instruments_popup = false;
