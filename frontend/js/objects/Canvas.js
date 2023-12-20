@@ -54,6 +54,12 @@ class Canvas {
         case LINE:
           startLine(this, e);
           break;
+        case CIRCLE:
+          startCircle(this, e);
+          break;
+        case CUSTOM_SHAPE:
+          startLine(this, e);
+          break;
         default:
           return;
       }
@@ -79,6 +85,12 @@ class Canvas {
         case LINE:
           updateLine(this, e);
           break;
+        case CIRCLE:
+          updateCircle(this, e);
+          break;
+        case CUSTOM_SHAPE:
+          updateLine(this, e);
+          break;
         default:
           return;
       }
@@ -101,6 +113,13 @@ class Canvas {
           break;
         case LINE:
           finishLine(this, e);
+          break;
+        case CIRCLE:
+          finishCircle(this, e);
+          break;
+        case CUSTOM_SHAPE:
+          finishLine(this, e);
+          startLine(this, e);
           break;
         default:
           return;
