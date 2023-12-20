@@ -165,7 +165,7 @@ function downloadCanvas() {
 }
 
 function triggerUpload() {
-  document.getElementById("imageLoader").click(); // Trigger file input
+  document.getElementById("imageLoader").click();
 }
 
 function loadImageToCanvas(event) {
