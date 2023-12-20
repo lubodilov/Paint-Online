@@ -46,7 +46,7 @@ class Canvas {
           startCustomLine(this, e);
           break;
         case TRIANGLE:
-          startTriangle(this, e)
+          startTriangle(this, e);
           break;
         case RECTANGLE:
           startRectangle(this, e);
@@ -77,7 +77,7 @@ class Canvas {
           updateCustomLine(this, e);
           break;
         case TRIANGLE:
-          updateTriangle(this, e)
+          updateTriangle(this, e);
           break;
         case RECTANGLE:
           updateRectangle(this, e);
@@ -107,7 +107,7 @@ class Canvas {
           finishCustomLine(this, e);
           break;
         case TRIANGLE:
-          finishTriangle(this, e)
+          finishTriangle(this, e);
           break;
         case RECTANGLE:
           finishRectangle(this, e);

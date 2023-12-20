@@ -12,8 +12,9 @@
         <div id = "game">
             <div id = "top">
                 <div id = "actions">
-                    <div id = "upload">Upload</div>
-                    <div id = "download">Download</div>
+                    <input type="file" id="imageLoader" name="imageLoader" accept="image/*" style="display: none;" onchange="loadImageToCanvas(event)" />
+                    <div id = "upload" onclick="triggerUpload()">Upload</div>
+                    <div id = "download" onclick = "downloadCanvas()">Download</div>
                     <div id = "view">View</div>
                 </div>
 
