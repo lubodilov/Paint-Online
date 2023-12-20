@@ -12,8 +12,9 @@
         <div id = "game">
             <div id = "top">
                 <div id = "actions">
-                    <div id = "upload">Upload</div>
-                    <div id = "download">Download</div>
+                    <input type="file" id="imageLoader" name="imageLoader" accept="image/*" style="display: none;" onchange="loadImageToCanvas(event)" />
+                    <div id = "upload" onclick="triggerUpload()">Upload</div>
+                    <div id = "download" onclick = "downloadCanvas()">Download</div>
                     <div id = "view">View</div>
                 </div>
 
@@ -203,6 +204,8 @@
         <script src = "../js/managers/triangleManager.js"></script>
         <script src = "../js/managers/rectangleManager.js"></script>
         <script src = "../js/managers/circleManager.js"></script>
+        <script src = "../js/managers/customShapeManager.js"></script>
+
 
 
         <script src = "../js/objects/CustomLine.js"></script>
@@ -211,6 +214,8 @@
         <script src = "../js/objects/Triangle.js"></script>
         <script src = "../js/objects/Rectangle.js"></script>
         <script src = "../js/objects/Circle.js"></script>
+        <script src = "../js/objects/CustomShape.js"></script>
+
 
 
         <script src = "../js/objects/Party.js"></script>
