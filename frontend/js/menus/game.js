@@ -37,6 +37,18 @@ function createColors(){
     }
 }
 
+function createPaletteColors(){
+    const grid = document.getElementById("palette-popup-middle");
+    for(let i = 0;i < 15;i++){
+      const el = document.createElement("div");
+      el.classList = "color";
+      el.style.backgroundColor = `${colors[i]}`;
+      el.onclick = () => { updateColor(i) }
+      grid.append(el); 
+    }
+}
+createPaletteColors();
+
 function createSizes(){
     const dropdown = document.getElementById("size-dropdown");
     for(const index in LINE_SIZE){

@@ -146,7 +146,7 @@
                     <div id = "colors"></div>
 
                     <div id = "palette">
-                        <img src = "../assets/palette.png">
+                        <img src = "../assets/palette.png" onclick = "openPalettePopup()">
                     </div>
                 </div>
             </div>
@@ -165,6 +165,29 @@
                     <img src = "../assets/zoom.png">
                 </div>
             </div>
+
+            <div id = 'palette-popup-wrapper'>
+                <div id = "palette-popup">
+                    <div id = "palette-popup-top">
+                        <div></div>
+                        <div id = "palette-title">
+                            <label>Palette Control</label>
+                        </div>
+                        <div id = "palette-exit">
+                            <button>x</button>
+                        </div>
+                    </div>
+
+                    <div id = "palette-popup-middle">
+                        
+                    </div>
+
+                    <div id = "palette-popup-bottom">
+                        <input type = "color"></input>
+                        <button>Select</button>
+                    </div>
+                </div>
+            </div>
         </div>
 
 
@@ -181,7 +204,6 @@
         <script src = "../js/managers/rectangleManager.js"></script>
         <script src = "../js/managers/circleManager.js"></script>
 
-        
 
         <script src = "../js/objects/CustomLine.js"></script>
         <script src = "../js/objects/ColorPicker.js"></script>
