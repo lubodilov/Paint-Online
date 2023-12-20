@@ -24,16 +24,6 @@ function createSelectPlayersNumber(min_p , max_p){
     }
 }
 
-function showEl(el){
-    el.style.opacity = "1";
-    el.style.visibility = "visible";
-}
-
-function hideEl(el){
-    el.style.opacity = "0";
-    el.style.visibility = "hidden";
-}
-
 function closeSoloPopup(){
     cur_popup = undefined;
     const popup_el = document.getElementById("solo-popup");

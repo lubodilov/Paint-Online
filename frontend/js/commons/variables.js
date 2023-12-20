@@ -24,6 +24,7 @@ let color2 = {
 }
 
 let colors = STARTING_COLORS;
+let selected_palette_color = undefined;
 
 let figures = [];
 
