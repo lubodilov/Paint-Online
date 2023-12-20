@@ -67,14 +67,23 @@ function changePaletteColor(index){
 }
 
 function selectPaletteColor(){
-    if(!selected_palette_color)return;
-    const palette_color_els = document.getElementsByClassName("palette-color");
-    const color_els = document.getElementsByClassName("color");
-    const input = document.getElementById("palette-color-input");
-    colors[selected_palette_color] = input.value;
-    palette_color_els[selected_palette_color].style.backgroundColor = `${input.value}`;
-    color_els[selected_palette_color].style.backgroundColor = `${input.value}`;
+  if(!selected_palette_color)return;
+  const palette_color_els = document.getElementsByClassName("palette-color");
+  const color_els = document.getElementsByClassName("color");
+  const input = document.getElementById("palette-color-input");
+  colors[selected_palette_color] = input.value;
+  palette_color_els[selected_palette_color].style.backgroundColor = `${input.value}`;
+  color_els[selected_palette_color].style.backgroundColor = `${input.value}`;
+}
 
+function removePaletteColor(){
+  if(!selected_palette_color)return;
+  const palette_color_els = document.getElementsByClassName("palette-color");
+  const color_els = document.getElementsByClassName("color");
+  const input = document.getElementById("palette-color-input");
+  colors[selected_palette_color] = "transparent";
+  palette_color_els[selected_palette_color].style.backgroundColor = `transparent`;
+  color_els[selected_palette_color].style.backgroundColor = `transparent`;
 }
 
 function openPalettePopup(){
