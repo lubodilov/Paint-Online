@@ -23,6 +23,7 @@ canvas.listenForSockets();
 canvas.listenForEvents();
 
 createColors();
+createPaletteColors();
 createSizes();
 
 
@@ -41,13 +42,47 @@ function createPaletteColors(){
     const grid = document.getElementById("palette-popup-middle");
     for(let i = 0;i < 15;i++){
       const el = document.createElement("div");
-      el.classList = "color";
+      el.classList = "palette-color";
       el.style.backgroundColor = `${colors[i]}`;
-      el.onclick = () => { updateColor(i) }
+      el.onclick = () => { changePaletteColor(i) };
       grid.append(el); 
     }
 }
-createPaletteColors();
+
+function changePaletteColor(index){
+    const palette_colors = document.getElementsByClassName("palette-color");
+    for(const palette_color of palette_colors)
+        palette_color.style.border = "1px solid white";
+
+    if(selected_palette_color == index)
+        selected_palette_color = undefined;
+    else{
+        selected_palette_color = index;
+        palette_colors[selected_palette_color].style.border = "3px solid white";
+    }
+  
+}
+
+function selectPaletteColor(){
+    if(!selected_palette_color)return;
+    const palette_color_els = document.getElementsByClassName("palette-color");
+    const color_els = document.getElementsByClassName("color");
+    const input = document.getElementById("palette-color-input");
+    colors[selected_palette_color] = input.value;
+    palette_color_els[selected_palette_color].style.backgroundColor = `${input.value}`;
+    color_els[selected_palette_color].style.backgroundColor = `${input.value}`;
+
+}
+
+function openPalettePopup(){
+    const palette_popup_el = document.getElementById("palette-popup-wrapper");
+    showEl(palette_popup_el);
+}
+
+function closePalettePopup(){
+    const palette_popup_el = document.getElementById("palette-popup-wrapper");
+    hideEl(palette_popup_el);
+}
 
 function createSizes(){
     const dropdown = document.getElementById("size-dropdown");

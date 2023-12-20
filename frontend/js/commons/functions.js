@@ -35,3 +35,13 @@ function generateCode(length) {
 
   return "#" + result;
 }
+
+function showEl(el){
+  el.style.opacity = "1";
+  el.style.visibility = "visible";
+}
+
+function hideEl(el){
+  el.style.opacity = "0";
+  el.style.visibility = "hidden";
+}

@@ -174,7 +174,7 @@
                             <label>Palette Control</label>
                         </div>
                         <div id = "palette-exit">
-                            <button>x</button>
+                            <button onclick = "closePalettePopup()">x</button>
                         </div>
                     </div>
 
@@ -183,8 +183,8 @@
                     </div>
 
                     <div id = "palette-popup-bottom">
-                        <input type = "color"></input>
-                        <button>Select</button>
+                        <input id = "palette-color-input" type = "color"></input>
+                        <button onclick = "selectPaletteColor()">Select</button>
                     </div>
                 </div>
             </div>

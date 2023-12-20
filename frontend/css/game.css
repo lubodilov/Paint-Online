@@ -301,11 +301,14 @@ body {
 /*PALETTE POPUP MENU*/
 #palette-popup-wrapper{
     position: absolute;
+    visibility: hidden;
+    opacity: 0;
     top: 0;
     left: 0;
     width: 100vw;
     height: 100vh;
     z-index: 200;
+    transition: 0.3s ease-in;
 }
 
 #palette-popup{
@@ -316,6 +319,7 @@ body {
     padding: 5px;
     width: 300px;
     height: 160px;
+    background-color: saddlebrown;
     border: 1px solid black;
 }
 
@@ -349,6 +353,7 @@ body {
 #palette-popup-middle >div{
     height: 25px;
     width: 25px;
+    border: 1px solid white;
 }
 
 #palette-popup-bottom{
