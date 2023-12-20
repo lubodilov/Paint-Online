@@ -48,6 +48,9 @@ class Canvas {
         case RECTANGLE:
           startRectangle(this, e);
           break;
+        case LINE:
+          startLine(this, e);
+          break;
         default:
           return;
       }
@@ -67,6 +70,9 @@ class Canvas {
         case RECTANGLE:
           updateRectangle(this, e);
           break;
+        case LINE:
+          updateLine(this, e);
+          break;
         default:
           return;
       }
@@ -84,6 +90,9 @@ class Canvas {
         case RECTANGLE:
           finishRectangle(this, e);
           break;
+        case LINE:
+          finishLine(this, e);
+          break;
         default:
           return;
       }
@@ -93,6 +102,7 @@ class Canvas {
       switch (tool) {
         case COLOR_PICKER:
           colorPicking(e);
+          break;
         default:
           return;
       }
