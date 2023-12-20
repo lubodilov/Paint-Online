@@ -1,18 +1,14 @@
 function startRectangle(c, ev) {
-  let border_color;
+  let color;
   if (color1.selected) {
-    border_color = ev.button == 0 ? color2.color : color1.color;
+    color = ev.button == 0 ? color1.color : color2.color;
   } else if (color2.selected) {
-    border_color = ev.button == 0 ? color1.color : color2.color;
+    color = ev.button == 0 ? color2.color : color1.color;
   } else {
-    if (tool == PEN) {
-      border_color = ev.button == 0 ? color2.color : color1.color;
-    } else {
-      border_color = ev.button == 0 ? color1.color : color2.color;
-    }
+    color = ev.button == 0 ? color1.color : color2.color;
   }
   const image_data = c.ctx.getImageData(0, 0, c.canvas_width, c.canvas_height);
-  c.cur_figure = new Rectangle(line_conf, border_color, image_data);
+  c.cur_figure = new Rectangle(line_conf, color, image_data);
   c.cur_figure.startRectangle(ev.offsetX, ev.offsetY);
 
   c.updateCanvas(c.cur_canvas_data);

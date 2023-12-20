@@ -9,8 +9,6 @@ class Rectangle {
     this.width = line_conf.size;
     this.dashed = line_conf.dashed;
 
-    this.prev_bottom_coords = {};
-
     this.from_coords = {};
     this.bottom_coords = {};
   }
@@ -20,7 +18,7 @@ class Rectangle {
     this.ctx.putImageData(this.image_data, 0, 0);
 
     this.ctx.beginPath();
-    this.ctx.strokeStyle = this.inside_color;
+    this.ctx.strokeStyle = this.border_color;
 
     if (this.dashed)
       this.ctx.setLineDash([
@@ -28,8 +26,6 @@ class Rectangle {
         GAP_LENGTH * this.line_conf.size,
       ]);
     else this.ctx.setLineDash([]);
-
-    this.prev_to_coords = { x: fromX, y: fromY };
   }
 
   updateRectangle(toX, toY) {
@@ -44,11 +40,9 @@ class Rectangle {
       Math.abs(toX - this.from_coords.x),
       Math.abs(toY - this.from_coords.y)
     );
-    this.prev_to_coords = { x: toX, y: toY };
   }
 
   finishRectangle(toX, toY) {
-    this.updateRectangle(toX, toY);
     this.bottom_coords = { x: toX, y: toY };
     this.ctx.closePath();
   }
