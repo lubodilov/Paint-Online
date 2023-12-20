@@ -184,6 +184,31 @@ function loadImageToCanvas(event) {
   reader.readAsDataURL(event.target.files[0]);
 }
 
+document.addEventListener("DOMContentLoaded", function () {
+  const canvas = document.getElementById("gameCanvas");
+  const ctx = canvas.getContext("2d");
+  const zoomLevelDisplay = document.getElementById("zoom-level-display");
+  const zoomSlider = document.getElementById("zoom-slider");
+  const zoomApplyButton = document.getElementById("zoom-apply-button");
+
+  function updateZoomDisplay() {
+    zoomLevelDisplay.textContent = zoomSlider.value + "%";
+  }
+
+  function applyZoom() {
+    const zoomLevel = (parseInt(zoomSlider.value) / 100) * 2;
+
+    canvas.style.transform = `scale(${zoomLevel})`;
+    canvas.style.transformOrigin = "top left";
+  }
+
+  zoomSlider.addEventListener("input", updateZoomDisplay);
+
+  zoomApplyButton.addEventListener("click", applyZoom);
+
+  updateZoomDisplay();
+});
+
 function leaveGame() {
   storage.changePlayerData();
   location.pathname = `/`;
