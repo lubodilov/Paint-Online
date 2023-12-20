@@ -110,14 +110,10 @@ class Canvas {
           finishCircle(this, e);
           break;
         case CUSTOM_SHAPE:
-          //   if (e.button == 0) {
           finishCustomShape(this, e);
           if (e.offsetX - lines[0] > 5 || e.offsetY - lines[1] > 5) {
             startCustomShape(this, e);
           }
-          //   } else {
-          //     finishCustomShape2(this, e);
-          //   }
           break;
         default:
           return;
