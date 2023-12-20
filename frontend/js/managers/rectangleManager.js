@@ -11,7 +11,7 @@ function startRectangle(c, ev) {
   c.cur_figure = new Rectangle(line_conf, color, image_data);
   c.cur_figure.startRectangle(ev.offsetX, ev.offsetY);
 
-  c.updateCanvas(c.cur_canvas_data);
+  // c.updateCanvas(c.cur_canvas_data);
   socket.emit("create-figure", player.party.code, c.cur_canvas_data);
 }
 
@@ -20,7 +20,7 @@ function updateRectangle(c, ev) {
   c.ctx.clearRect(0, 0, c.canvas_width, c.canvas_height);
   c.cur_figure.updateRectangle(ev.offsetX, ev.offsetY);
 
-  c.updateCanvas(c.cur_canvas_data);
+  // c.updateCanvas(c.cur_canvas_data);
   socket.emit("update-figure", player.party.code, c.cur_canvas_data);
 }
 

@@ -99,7 +99,6 @@ class Canvas {
     });
 
     this.canvas.addEventListener("mouseup", (e) => {
-      console.log(e.button);
       switch (tool) {
         case PEN:
         case RUBBER:
@@ -156,9 +155,11 @@ class Canvas {
   }
 
   updateCanvas(image_data) {
+    this.cur_canvas_data = image_data;
     const img = new Image();
     img.src = image_data;
     img.onload = () => {
+      this.ctx.clearRect(0 , 0 , this.canvas_width , this.canvas_height);
       this.ctx.drawImage(img, 0, 0);
     };
   }
@@ -181,6 +182,7 @@ class Canvas {
   }
 
   changeCanvas(image_data) {
+    // this.ctx.clearRect(0 , 0 , this.canvas_width , this.canvas_height);
     this.ctx.putImageData(image_data, 0, 0);
   }
 }
