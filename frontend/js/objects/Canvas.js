@@ -98,6 +98,16 @@ class Canvas {
       }
     });
 
+    document.addEventListener("click", (e) => {
+      switch (tool) {
+        case COLOR_PICKER:
+          colorPicking(e);
+          break;
+        default:
+          return;
+      }
+    });
+
     document.addEventListener("keydown", (e) => {
       if (e.ctrlKey && e.key === "z")
         if (this.cur_canvas_index > 0) this.cur_canvas_index--;
