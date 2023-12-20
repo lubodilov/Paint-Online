@@ -55,7 +55,7 @@ class Canvas {
           startCircle(this, e);
           break;
         case CUSTOM_SHAPE:
-          startLine(this, e);
+          startCustomShape(this, e);
           break;
         default:
           return;
@@ -83,7 +83,7 @@ class Canvas {
           updateCircle(this, e);
           break;
         case CUSTOM_SHAPE:
-          updateLine(this, e);
+          updateCustomShape(this, e);
           break;
         default:
           return;
@@ -93,6 +93,7 @@ class Canvas {
     });
 
     this.canvas.addEventListener("mouseup", (e) => {
+      console.log(e.button);
       switch (tool) {
         case PEN:
         case RUBBER:
@@ -109,15 +110,21 @@ class Canvas {
           finishCircle(this, e);
           break;
         case CUSTOM_SHAPE:
-          finishLine(this, e);
-          startLine(this, e);
+          //   if (e.button == 0) {
+          finishCustomShape(this, e);
+          if (e.offsetX - lines[0] > 5 || e.offsetY - lines[1] > 5) {
+            startCustomShape(this, e);
+          }
+          //   } else {
+          //     finishCustomShape2(this, e);
+          //   }
           break;
         default:
           return;
       }
     });
 
-    document.addEventListener("click", (e) => {
+    this.canvas.addEventListener("click", (e) => {
       switch (tool) {
         case COLOR_PICKER:
           colorPicking(e);
@@ -128,6 +135,9 @@ class Canvas {
     });
 
     document.addEventListener("keydown", (e) => {
+      if (e.key === "p") {
+        finishCustomShape(this, e);
+      }
       if (e.ctrlKey && e.key === "z")
         if (this.cur_canvas_index > 0) this.cur_canvas_index--;
 
