@@ -22,7 +22,11 @@ app.get('/', (req, res) => {
     res.sendFile(path.join(__dirname, '../frontend/views/home.html'));
 });
 
-app.get('/:id', (req, res) => {
+app.get('/solo/:id', (req, res) => {
+    res.sendFile(path.join(__dirname, '../frontend/views/game.html'));
+});
+
+app.get('/party/:id', (req, res) => {
     res.sendFile(path.join(__dirname, '../frontend/views/game.html'));
 });
 
