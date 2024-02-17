@@ -287,3 +287,19 @@ function leaveGame() {
   storage.changePlayerData();
   location.pathname = `/`;
 }
+
+function cutSquare(){
+  canvas.cutSquare();
+}
+
+function copySquare(){
+  canvas.copySquare();
+}
+
+function deleteSquare(){
+  canvas.deleteSquare();
+}
+
+function pasteSquare(){
+  canvas.pasteSquare();
+}
