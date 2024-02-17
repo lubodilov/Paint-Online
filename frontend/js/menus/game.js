@@ -249,6 +249,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
   function updateZoomDisplay() {
     zoomLevelDisplay.textContent = zoomSlider.value + "%";
+    applyZoom(); 
   }
 
   function applyZoom() {
@@ -257,28 +258,27 @@ document.addEventListener("DOMContentLoaded", function () {
     canvas.style.transform = `scale(${zoomLevel})`;
     canvas.style.transformOrigin = "top left";
 
-    const resizeS = document.getElementById('resize_s');
-    const resizeSE = document.getElementById('resize_se');
-    const resizeE = document.getElementById('resize_e');
+    // const resizeS = document.getElementById('resize_s');
+    // const resizeSE = document.getElementById('resize_se');
+    // const resizeE = document.getElementById('resize_e');
 
-    resizeS.style.left = "200px";
-    resizeS.style.top = "300px";
-    resizeSE.style.left = "400px";
-    resizeSE.style.top = "300px";
-    resizeE.style.left = "400px";
-    resizeE.style.top = "150px";
+    // resizeS.style.left = "200px";
+    // resizeS.style.top = "300px";
+    // resizeSE.style.left = "400px";
+    // resizeSE.style.top = "300px";
+    // resizeE.style.left = "400px";
+    // resizeE.style.top = "150px";
 
-    resizeS.style.left = (parseFloat(resizeS.style.left) * zoomLevel) + 'px';
-    resizeS.style.top = (parseFloat(resizeS.style.top) * zoomLevel) + 'px';
-    resizeSE.style.left = (parseFloat(resizeSE.style.left) * zoomLevel) + 'px';
-    resizeSE.style.top = (parseFloat(resizeSE.style.top) * zoomLevel) + 'px';
-    resizeE.style.left = (parseFloat(resizeE.style.left) * zoomLevel) + 'px';
-    resizeE.style.top = (parseFloat(resizeE.style.top) * zoomLevel) + 'px';
+    // resizeS.style.left = (parseFloat(resizeS.style.left) * zoomLevel) + 'px';
+    // resizeS.style.top = (parseFloat(resizeS.style.top) * zoomLevel) + 'px';
+    // resizeSE.style.left = (parseFloat(resizeSE.style.left) * zoomLevel) + 'px';
+    // resizeSE.style.top = (parseFloat(resizeSE.style.top) * zoomLevel) + 'px';
+    // resizeE.style.left = (parseFloat(resizeE.style.left) * zoomLevel) + 'px';
+    // resizeE.style.top = (parseFloat(resizeE.style.top) * zoomLevel) + 'px';
   }
 
   zoomSlider.addEventListener("input", updateZoomDisplay);
 
-  zoomApplyButton.addEventListener("click", applyZoom);
 
   updateZoomDisplay();
 });
