@@ -163,9 +163,11 @@
                 <div class = "resize" id = "resize_e"></div>
                 
                 <div id = "zoom-wrapper">
-                    <div>100%</div>
-                    <input type = "range"></input>
-                    <img src = "../assets/zoom.png">
+                    <div id="zoom-level-display">100%</div>
+                    <input id="zoom-slider" type="range" min="25" max="400" value="100"></input>
+                    <div id = "zoom-apply-button">
+                        <img src = "../assets/zoom.png">
+                    </div>
                 </div>
             </div>
 

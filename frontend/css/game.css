@@ -282,6 +282,7 @@ body {
     cursor: e-resize;
 }
 
+
 /* Zoom */
 #zoom-wrapper {
     position: fixed;
@@ -293,7 +294,12 @@ body {
     right: 30px;
 }
 
-#zoom-wrapper>img {
+#zoom-apply-button {
+    width: 30px;
+    height: 30px;
+}
+
+#zoom-apply-button>img {
     width: 30px;
     height: 30px;
 }
