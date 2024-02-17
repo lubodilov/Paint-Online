@@ -199,4 +199,16 @@ class Canvas {
     // this.ctx.clearRect(0 , 0 , this.canvas_width , this.canvas_height);
     this.ctx.putImageData(image_data, 0, 0);
   }
+
+  cutSquare(){
+
+  }
+
+  copySquare(){
+
+  }
+
+  deleteSquare(){
+    
+  }
 }
