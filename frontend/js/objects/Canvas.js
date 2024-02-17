@@ -7,6 +7,7 @@ class Canvas {
     this.zoom = 100;
 
     this.cur_figure = undefined;
+    this.select_obj = undefined;
     this.cur_canvas_data = undefined;
     this.all_canvas_data = [
       this.ctx.getImageData(0, 0, this.canvas_width, this.canvas_height),
@@ -60,6 +61,9 @@ class Canvas {
         case CUSTOM_SHAPE:
           startCustomShape(this, e);
           break;
+        case SELECT:
+          startSelect(this , e);
+          break;
         default:
           return;
       }
@@ -90,6 +94,9 @@ class Canvas {
           break;
         case CUSTOM_SHAPE:
           updateCustomShape(this, e);
+          break;
+        case SELECT:
+          updateSelect(this , e);
           break;
         default:
           return;
@@ -123,6 +130,9 @@ class Canvas {
             startCustomShape(this, e);
           }
           break;
+        case SELECT:
+          finishSelect(this , e);
+          break;
         default:
           return;
       }
@@ -132,6 +142,9 @@ class Canvas {
       switch (tool) {
         case COLOR_PICKER:
           colorPicking(e);
+          break;
+        case SELECT:
+          toggleSelect(this , e);
           break;
         default:
           return;
@@ -155,6 +168,7 @@ class Canvas {
   }
 
   updateCanvas(image_data) {
+    console.log(image_data)
     this.cur_canvas_data = image_data;
     const img = new Image();
     img.src = image_data;
