@@ -201,14 +201,63 @@ class Canvas {
   }
 
   cutSquare(){
+    if(!this.select_obj)return;
 
+    this.copied_image_data = this.ctx.getImageData( Math.min(this.select_obj.from_coords.x + 5 , this.select_obj.bottom_coords.x + 5) , 
+                                                    Math.min(this.select_obj.from_coords.y + 5, this.select_obj.bottom_coords.y + 5) ,
+                                                    Math.abs( this.select_obj.bottom_coords.x - this.select_obj.from_coords.x) - 10 ,
+                                                    Math.abs( this.select_obj.bottom_coords.y - this.select_obj.from_coords.y) - 10);
+
+    this.ctx.clearRect( Math.min(this.select_obj.from_coords.x , this.select_obj.bottom_coords.x) - 5, 
+                        Math.min(this.select_obj.from_coords.y , this.select_obj.bottom_coords.y) - 5 ,
+                        Math.abs( this.select_obj.bottom_coords.x - this.select_obj.from_coords.x) + 10 ,
+                        Math.abs( this.select_obj.bottom_coords.y - this.select_obj.from_coords.y)+ 10);
+
+    this.cur_canvas_data = this.canvas.toDataURL("image/png");
+
+    socket.emit("update-figure", player.party.code, this.cur_canvas_data);
+
+
+    this.select_obj = undefined;
   }
 
   copySquare(){
+    if(!this.select_obj)return;
 
+    this.copied_image_data = this.ctx.getImageData( Math.min(this.select_obj.from_coords.x + 5 , this.select_obj.bottom_coords.x + 5) , 
+                                                    Math.min(this.select_obj.from_coords.y + 5, this.select_obj.bottom_coords.y + 5) ,
+                                                    Math.abs( this.select_obj.bottom_coords.x - this.select_obj.from_coords.x) - 10 ,
+                                                    Math.abs( this.select_obj.bottom_coords.y - this.select_obj.from_coords.y) - 10);
+
+    this.ctx.putImageData(this.select_obj.image_data , 0 , 0);
+
+    this.cur_canvas_data = this.canvas.toDataURL("image/png");
+
+    socket.emit("update-figure", player.party.code, this.cur_canvas_data);
+
+    this.select_obj = undefined;
   }
 
   deleteSquare(){
+    if(!this.select_obj)return;
+
+    this.ctx.clearRect( Math.min(this.select_obj.from_coords.x , this.select_obj.bottom_coords.x) - 5, 
+                        Math.min(this.select_obj.from_coords.y , this.select_obj.bottom_coords.y) - 5 ,
+                        Math.abs( this.select_obj.bottom_coords.x - this.select_obj.from_coords.x) + 10 ,
+                        Math.abs( this.select_obj.bottom_coords.y - this.select_obj.from_coords.y)+ 10);
+
+    this.cur_canvas_data = this.canvas.toDataURL("image/png");
     
+    socket.emit("update-figure", player.party.code, this.cur_canvas_data);
+
+    this.select_obj = undefined;
+  }
+
+  pasteSquare(){
+    if(!this.copied_image_data)return;
+
+    this.cur_canvas_data = this.canvas.toDataURL("image/png");
+
+    socket.emit("update-figure", player.party.code, this.cur_canvas_data);
   }
 }

@@ -67,4 +67,3 @@ function startSelect(c, ev) {
     c.select_obj = undefined;
 }
   }
-  
