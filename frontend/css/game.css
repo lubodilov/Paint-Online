@@ -249,6 +249,11 @@ body {
 
 #bottom {
     position: relative;
+    overflow: scroll;
+}
+
+.body { 
+    overflow: hidden;
 }
 
 #gameCanvas {
