@@ -29,7 +29,10 @@ class Party{
         });
 
         socket.on("game-started" , () => {
-            location.pathname = `/${player.party.code}`;
+            if(this.max_players == 1)
+                location.pathname = `/solo/${player.party.code}`;
+            else
+                location.pathname = `/party/${player.party.code}`;
         })
     }
 

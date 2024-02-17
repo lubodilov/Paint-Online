@@ -256,6 +256,7 @@ class Canvas {
   pasteSquare(){
     if(!this.copied_image_data)return;
 
+    this.ctx.putImageData(this.copied_image_data , 0 , 0);
     this.cur_canvas_data = this.canvas.toDataURL("image/png");
 
     socket.emit("update-figure", player.party.code, this.cur_canvas_data);

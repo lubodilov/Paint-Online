@@ -56,8 +56,7 @@ function startSelect(c, ev) {
     if(!(ev.offsetX >= Math.min(cur_figure.from_coords.x , cur_figure.bottom_coords.x)
        && ev.offsetX <= Math.max(cur_figure.from_coords.x , cur_figure.bottom_coords.x)
        && ev.offsetY >= Math.min(cur_figure.from_coords.y , cur_figure.bottom_coords.y)
-       && ev.offsetY <= Math.max(cur_figure.from_coords.y , cur_figure.bottom_coords.y)))
-{
+       && ev.offsetY <= Math.max(cur_figure.from_coords.y , cur_figure.bottom_coords.y))){
 
     c.ctx.clearRect(0 , 0 , c.canvas_width , c.canvas_height);
 
@@ -65,5 +64,5 @@ function startSelect(c, ev) {
     c.updateCanvas(cur_figure.image_data);
 
     c.select_obj = undefined;
+    }
 }
-  }
