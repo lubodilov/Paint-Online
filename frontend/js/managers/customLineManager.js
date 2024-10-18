@@ -43,7 +43,7 @@ function finishCustomLine(c){
     if(c.cur_figure){
         c.finishFigure(c.cur_canvas_data);
         if(player.party.max_players > 1)
-            socket.emit("finish-figure" , player.party.code , c.cur_canvas_data);
+            socket.emit("finish-figure" , player.party.code , c.cur_figure.canvas2.toDataURL("image/png"));
     }
 
     c.cur_figure = undefined;

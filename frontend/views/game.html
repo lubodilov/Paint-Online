@@ -3,8 +3,10 @@
     <head>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    	<meta name="apple-mobile-web-app-capable" content="yes">
         <title>Paint Online</title>
         <link rel="stylesheet" href="../css/game.css">
+        <link rel="shortcut icon" href="../../favicon.ico" type="image/x-icon" />
     </head>
     <body>
         <script src = "/socket.io/socket.io.js"></script>
@@ -15,7 +17,7 @@
                     <input type="file" id="imageLoader" name="imageLoader" accept="image/*" style="display: none;" onchange="loadImageToCanvas(event)" />
                     <div id = "upload" onclick="triggerUpload()">Upload</div>
                     <div id = "download" onclick = "downloadCanvas()">Download</div>
-                    <div id = "view">View</div>
+                    <div id = "view"  style = "opacity: 0.3">View</div>
                 </div>
 
                 <div id = "leave">
@@ -27,20 +29,20 @@
 
             <div id = "middle">
                 <div id = "trimmer-tools">
-                    <div id = "paste">
+                    <div id = "paste" onclick = "pasteSquare()">
                         <img src = "../assets/paste.png">
                     </div>
 
                     <div id = "removing-tools">
-                        <div id = "copy">
+                        <div id = "copy" onclick = "copySquare()">
                             <img src = "../assets/copy.png">
                         </div>
 
-                        <div id = "cut">
+                        <div id = "cut" onclick = "cutSquare()">
                             <img src = "../assets/cut.png">
                         </div>
 
-                        <div id = "delete">
+                        <div id = "delete" onclick = "deleteSquare()">
                             <img src = "../assets/delete.png">
                         </div>
                     </div>
@@ -58,11 +60,11 @@
                         <img src = "../assets/rubber.png">
                     </div>
 
-                    <div class = "tool" id = "text" onclick = "triggerTool('text')">
+                    <div class = "tool" id = "text" style = "opacity: 0.3">
                         <img src = "../assets/text.png">
                     </div>
 
-                    <div class = "tool" id = "paint-bucket" onclick = "triggerTool('paint-bucket')">
+                    <div class = "tool" id = "paint-bucket" style = "opacity: 0.3">
                         <img src = "../assets/bucket.png">
                     </div>
 
@@ -101,9 +103,9 @@
                             <label id = "brush-text" onclick = "triggerTool('brush')">Brush</label>
                         </div>
 
-                        <div class = "tool instrument" id = "spray">
+                        <!-- <div class = "tool instrument" id = "spray">
                             <label id = "spray-text">Spray</label>
-                        </div>
+                        </div> -->
                     </div>
                 </div>
 
@@ -124,7 +126,7 @@
                         <img src = "../assets/rectangle.png">
                     </div>
 
-                    <div class = "tool" id = "curved-line">
+                    <div class = "tool"  style = "opacity: 0.3">
                         <img src = "../assets/curved-line.png">
                     </div>
 
@@ -156,14 +158,16 @@
 
             <div id = "bottom">
                 <canvas id = "gameCanvas"; width = "400px"; height = "300px"></canvas>
-                <div class = "resize" id = "resize_s"></div>
+                <!-- <div class = "resize" id = "resize_s"></div>
                 <div class = "resize" id = "resize_se"></div>
-                <div class = "resize" id = "resize_e"></div>
+                <div class = "resize" id = "resize_e"></div> -->
                 
                 <div id = "zoom-wrapper">
-                    <div>100%</div>
-                    <input type = "range"></input>
-                    <img src = "../assets/zoom.png">
+                    <div id="zoom-level-display">100%</div>
+                    <input id="zoom-slider" type="range" min="25" max="300" value="100"></input>
+                    <div id = "zoom-apply-button">
+                        <img src = "../assets/zoom.png">
+                    </div>
                 </div>
             </div>
 
@@ -199,13 +203,14 @@
         <script src = "../js/commons/functions.js"></script>
         <script src = "../js/commons/storage.js"></script>
 
-        <script src = "../js/managers/CustomLineManager.js"></script>
+        <script src = "../js/managers/customLineManager.js"></script>
         <script src = "../js/managers/colorPickerManager.js"></script>
         <script src = "../js/managers/lineManager.js"></script>
         <script src = "../js/managers/triangleManager.js"></script>
         <script src = "../js/managers/rectangleManager.js"></script>
         <script src = "../js/managers/circleManager.js"></script>
         <script src = "../js/managers/customShapeManager.js"></script>
+        <script src = "../js/managers/selectManager.js"></script>
 
 
 
@@ -216,6 +221,7 @@
         <script src = "../js/objects/Rectangle.js"></script>
         <script src = "../js/objects/Circle.js"></script>
         <script src = "../js/objects/CustomShape.js"></script>
+        <script src = "../js/objects/Select.js"></script>
 
 
 

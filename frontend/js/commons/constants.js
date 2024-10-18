@@ -60,4 +60,4 @@ const CUSTOM_SHAPE = "polygon";
 
 
 const game_canvas = document.getElementById("gameCanvas");
-const game_ctx = game_canvas.getContext("2d");
+const game_ctx = game_canvas?.getContext("2d");

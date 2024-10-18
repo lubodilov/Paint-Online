@@ -240,7 +240,66 @@ function loadImageToCanvas(event) {
   reader.readAsDataURL(event.target.files[0]);
 }
 
+document.addEventListener("DOMContentLoaded", function () {
+  const canvas = document.getElementById("gameCanvas");
+  const ctx = canvas.getContext("2d");
+  const zoomLevelDisplay = document.getElementById("zoom-level-display");
+  const zoomSlider = document.getElementById("zoom-slider");
+  const zoomApplyButton = document.getElementById("zoom-apply-button");
+
+  function updateZoomDisplay() {
+    zoomLevelDisplay.textContent = zoomSlider.value + "%";
+    applyZoom(); 
+  }
+
+  function applyZoom() {
+    const zoomLevel = (parseInt(zoomSlider.value) / 200) * 2;
+
+    canvas.style.transform = `scale(${zoomLevel})`;
+    canvas.style.transformOrigin = "top left";
+
+    // const resizeS = document.getElementById('resize_s');
+    // const resizeSE = document.getElementById('resize_se');
+    // const resizeE = document.getElementById('resize_e');
+
+    // resizeS.style.left = "200px";
+    // resizeS.style.top = "300px";
+    // resizeSE.style.left = "400px";
+    // resizeSE.style.top = "300px";
+    // resizeE.style.left = "400px";
+    // resizeE.style.top = "150px";
+
+    // resizeS.style.left = (parseFloat(resizeS.style.left) * zoomLevel) + 'px';
+    // resizeS.style.top = (parseFloat(resizeS.style.top) * zoomLevel) + 'px';
+    // resizeSE.style.left = (parseFloat(resizeSE.style.left) * zoomLevel) + 'px';
+    // resizeSE.style.top = (parseFloat(resizeSE.style.top) * zoomLevel) + 'px';
+    // resizeE.style.left = (parseFloat(resizeE.style.left) * zoomLevel) + 'px';
+    // resizeE.style.top = (parseFloat(resizeE.style.top) * zoomLevel) + 'px';
+  }
+
+  zoomSlider.addEventListener("input", updateZoomDisplay);
+
+
+  updateZoomDisplay();
+});
+
 function leaveGame() {
   storage.changePlayerData();
   location.pathname = `/`;
+}
+
+function cutSquare(){
+  canvas.cutSquare();
+}
+
+function copySquare(){
+  canvas.copySquare();
+}
+
+function deleteSquare(){
+  canvas.deleteSquare();
+}
+
+function pasteSquare(){
+  canvas.pasteSquare();
 }
